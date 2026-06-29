@@ -41,6 +41,7 @@
   --color-card: var(--card);
   --color-glow: var(--glow);
   --color-rec: var(--rec);
+  --color-services-bg: var(--services-bg);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -89,6 +90,8 @@ body {
   --sidebar-accent-foreground: oklch(0.22 0.02 265);
   --sidebar-border: oklch(0.14 0.02 265 / 12%);
   --sidebar-ring: oklch(0.55 0.13 62 / 45%);
+  --services-bg: oklch(0.948 0.022 86);
+  --services-bg-accent: oklch(0.918 0.034 78);
 }
 
 .dark {
@@ -144,5 +147,58 @@ body {
   h5,
   h6 {
     @apply font-heading;
+  }
+}
+
+/* Paper base + photo texture for services section */
+.services-texture {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--services-bg);
+  background-image: linear-gradient(
+    165deg,
+    color-mix(in oklch, var(--services-bg) 82%, var(--primary) 18%) 0%,
+    var(--services-bg) 45%,
+    color-mix(in oklch, var(--services-bg) 88%, var(--services-bg-accent) 12%) 100%
+  );
+}
+
+.services-texture-image {
+  background-image: url("/images/background-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+}
+
+@layer components {
+  .btn-viewfinder-hatch {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 5px,
+      color-mix(in oklch, var(--btn-corner, var(--foreground)) 55%, transparent)
+        5px,
+      color-mix(in oklch, var(--btn-corner, var(--foreground)) 55%, transparent)
+        6px
+    );
+  }
+
+  .btn-viewfinder-blade {
+    transform: scaleY(0);
+    transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+    transition-delay: calc(var(--blade-index, 0) * 16ms);
+  }
+
+  .group\/button:hover .btn-viewfinder-blade,
+  .group\/button:focus-visible .btn-viewfinder-blade {
+    transform: scaleY(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-viewfinder-blade {
+      transform: none;
+      transition: none;
+    }
   }
 }

@@ -5,28 +5,33 @@ import {
   type CameraIntroPhase,
 } from "@/components/camera-intro";
 import { HeroHeadline } from "@/components/hero-headline";
-import { PlayPauseIcon } from "@/components/icons/play-pause-icon";
-import { VolumeIcon } from "@/components/icons/volume-icon";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { ScrollPageButton } from "@/components/scroll-page-button";
+import { VideoPlayerControls } from "@/components/video-player-controls";
+import { useVideoPlayer } from "@/hooks/use-video-player";
 import { motion, useReducedMotion } from "motion/react";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import { Separator } from "@/components/ui/separator";
 
-import { ArrowUpRight, RotateCcw, SkipBack, SkipForward } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const zoomEase = [0.83, 0, 0.17, 1] as const;
-const SKIP_SECONDS = 10;
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [introPhase, setIntroPhase] = useState<CameraIntroPhase>("standby");
   const [introComplete, setIntroComplete] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+  const {
+    isPlaying,
+    isMuted,
+    togglePlay,
+    toggleMute,
+    seekBy,
+    restart,
+    skipSeconds,
+  } = useVideoPlayer(videoRef);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -34,63 +39,6 @@ export function Hero() {
       setIntroComplete(true);
     }
   }, [prefersReducedMotion]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-    const handleVolumeChange = () => setIsMuted(video.muted);
-
-    video.addEventListener("play", handlePlay);
-    video.addEventListener("pause", handlePause);
-    video.addEventListener("volumechange", handleVolumeChange);
-
-    return () => {
-      video.removeEventListener("play", handlePlay);
-      video.removeEventListener("pause", handlePause);
-      video.removeEventListener("volumechange", handleVolumeChange);
-    };
-  }, []);
-
-  const togglePlay = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.paused) {
-      void video.play();
-    } else {
-      video.pause();
-    }
-  };
-
-  const toggleMute = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = !video.muted;
-  };
-
-  const seekBy = (seconds: number) => {
-    const video = videoRef.current;
-    if (!video || !Number.isFinite(video.duration)) return;
-
-    video.currentTime = Math.min(
-      Math.max(video.currentTime + seconds, 0),
-      video.duration
-    );
-  };
-
-  const restartVideo = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.currentTime = 0;
-    if (video.paused) {
-      void video.play();
-    }
-  };
 
   const isZooming =
     introPhase === "recording" ||
@@ -197,8 +145,18 @@ export function Hero() {
               className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
               variants={fadeUp}
             >
-              <Link href="#services" className={buttonVariants({ variant: "default", size: "xl" })}>View services</Link>
-              <Link href="#contact" className={buttonVariants({ variant: "outline", size: "xl" })}>Book a call <ArrowUpRight className="size-5 " /></Link>
+              <ScrollPageButton variant="default" size="xl" targetId="services">
+                View services
+              </ScrollPageButton>
+              <ScrollPageButton
+                variant="outline"
+                size="xl"
+                targetId="contact"
+                data-icon="inline-end"
+              >
+                Book a call
+                <ArrowUpRight className="size-5" />
+              </ScrollPageButton>
 
             </motion.div>
           </motion.div>
@@ -212,46 +170,16 @@ export function Hero() {
           animate={introComplete ? "visible" : "hidden"}
           variants={fadeUp}
         >
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={restartVideo}
-            aria-label="Restart video"
-          >
-            <RotateCcw className="size-5" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => seekBy(-SKIP_SECONDS)}
-            aria-label={`Skip back ${SKIP_SECONDS} seconds`}
-          >
-            <SkipBack className="size-5" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={togglePlay}
-            aria-label={isPlaying ? "Pause video" : "Play video"}
-          >
-            <PlayPauseIcon playing={isPlaying} />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => seekBy(SKIP_SECONDS)}
-            aria-label={`Skip forward ${SKIP_SECONDS} seconds`}
-          >
-            <SkipForward className="size-5" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={toggleMute}
-            aria-label={isMuted ? "Unmute video" : "Mute video"}
-          >
-            <VolumeIcon muted={isMuted} />
-          </Button>
+        <VideoPlayerControls
+          isPlaying={isPlaying}
+          isMuted={isMuted}
+          onTogglePlay={togglePlay}
+          onToggleMute={toggleMute}
+          onSeekBack={() => seekBy(-skipSeconds)}
+          onSeekForward={() => seekBy(skipSeconds)}
+          onRestart={restart}
+          skipSeconds={skipSeconds}
+        />
         </motion.div>
       </div>
     </section>

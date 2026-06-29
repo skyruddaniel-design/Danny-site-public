@@ -32,11 +32,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "h-full antialiased",
+        "h-full antialiased motion-reduce:scroll-auto",
         montserrat.variable,
         outfit.variable,
         geistMono.variable
       )}
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>

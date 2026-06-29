@@ -1,9 +1,16 @@
 "use client";
 
+import { ServicesBackground } from "@/components/services-background";
+import { MagneticTargetCursor } from "@/components/magnetic";
 import { cn } from "@/lib/utils";
-import { motion, useReducedMotion } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const expandEase = [0.32, 0.72, 0, 1] as const;
@@ -51,8 +58,8 @@ const SERVICES: Service[] = [
     summary:
       "Clear direction before the cameras roll — so every asset has a job to do.",
     image:
-      "https://images.unsplash.com/photo-1531403009284-5f974d992ef8?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Creative team reviewing content on a laptop",
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80",
+    imageAlt: "Creative team planning a campaign together",
     items: [
       "Creative concepts",
       "Scripting",
@@ -110,6 +117,7 @@ function ServiceCard({
   onHover,
   onToggle,
   prefersReducedMotion,
+  hideSystemCursor,
 }: {
   service: Service;
   index: number;
@@ -117,6 +125,7 @@ function ServiceCard({
   onHover: () => void;
   onToggle: () => void;
   prefersReducedMotion: boolean | null;
+  hideSystemCursor?: boolean;
 }) {
   const contentTransition = prefersReducedMotion
     ? { duration: 0 }
@@ -139,13 +148,15 @@ function ServiceCard({
 
   return (
     <article
+      data-magnetic-target
       onMouseEnter={onHover}
       onFocus={onHover}
       onClick={onToggle}
       tabIndex={0}
       aria-expanded={active}
       className={cn(
-        "group relative min-h-[20rem] min-w-0 cursor-pointer overflow-hidden outline-none md:min-h-0 md:h-full",
+        "group relative min-h-[20rem] min-w-0 overflow-hidden outline-none md:min-h-0 md:h-full",
+        hideSystemCursor ? "md:cursor-none" : "cursor-pointer",
         "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       )}
     >
@@ -235,48 +246,123 @@ function ServiceCard({
 export function Services() {
   const prefersReducedMotion = useReducedMotion();
   const isDesktop = useIsDesktop();
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 0.85", "end 0.15"],
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 0.5, 1], [0, -35, -70]);
+  const watermarkY = useTransform(scrollYProgress, [0, 1], [16, -24]);
+  const gridScale = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], [1, 1.06, 1.06, 1]);
+  const gridY = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], [0, -40, -40, 0]);
+
+  const parallaxEnabled = !prefersReducedMotion;
 
   const fadeUp = prefersReducedMotion
     ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }
     : {
-        hidden: { opacity: 0, y: 24 },
+        hidden: { opacity: 0, y: 28 },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.65, ease },
+          transition: { duration: 0.7, ease },
         },
       };
 
+  const stagger = prefersReducedMotion ? 0 : 0.12;
+  const headerStagger = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: stagger,
+        delayChildren: prefersReducedMotion ? 0 : 0.08,
+      },
+    },
+  };
+
+  const cardStagger = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.1,
+        delayChildren: prefersReducedMotion ? 0 : 0.12,
+      },
+    },
+  };
+
   const gridTemplateColumns = isDesktop ? getGridColumns(activeIndex) : "1fr";
+  const magneticEnabled = isDesktop && !prefersReducedMotion;
 
   return (
-    <section id="services" className="bg-background text-foreground">
-      <div className="mx-auto max-w-[1440px] px-6 py-20 md:px-12 md:py-28 lg:px-16">
+    <section
+      id="services"
+      ref={sectionRef}
+      className={cn(
+        "services-texture relative overflow-hidden text-foreground",
+        magneticEnabled && "md:cursor-none md:[&_*]:cursor-none"
+      )}
+    >
+      <MagneticTargetCursor
+        containerRef={sectionRef}
+        enabled={magneticEnabled}
+      />
+
+      <ServicesBackground
+        scrollYProgress={scrollYProgress}
+        enabled={parallaxEnabled}
+      />
+
+      <div className="relative z-10 mx-auto max-w-[1440px] px-6 py-20 md:px-12 md:py-24 lg:px-16">
         <motion.div
-          className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+          style={parallaxEnabled ? { y: headerY } : undefined}
+          className="relative"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          variants={fadeUp}
+          variants={headerStagger}
         >
-          <div className="max-w-xl">
-            <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase">
-              Services
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight md:text-5xl">
-              What we make
-            </h2>
+          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
+            <motion.div variants={fadeUp} className="relative z-10 max-w-xl">
+              <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
+                What we make
+              </h2>
+              <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+                One team from brief to delivery — film, photography, strategy,
+                and post-production for brands that need to look as sharp as
+                they sound.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="hidden md:block">
+              <motion.p
+                aria-hidden
+                className="pointer-events-none shrink-0 self-start font-heading text-[clamp(3.5rem,10vw,7.5rem)] leading-[0.85] font-bold tracking-tighter text-foreground/10 uppercase select-none md:pt-1 md:text-right"
+                style={parallaxEnabled ? { y: watermarkY } : undefined}
+              >
+                Services
+              </motion.p>
+            </motion.div>
           </div>
-          
         </motion.div>
 
         <motion.div
-          className="mt-10 md:mt-14"
+          className="relative mt-18 md:mt-20"
+          style={
+            parallaxEnabled
+              ? {
+                  scale: gridScale,
+                  y: gridY,
+                  transformOrigin: "center center",
+                }
+              : undefined
+          }
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
-          variants={fadeUp}
+          viewport={{ once: true, margin: "-60px" }}
+          variants={cardStagger}
         >
           <div
             className={cn(
@@ -288,19 +374,25 @@ export function Services() {
             onMouseLeave={() => setActiveIndex(null)}
           >
             {SERVICES.map((service, index) => (
-              <ServiceCard
+              <motion.div
                 key={service.title}
-                service={service}
-                index={index}
-                active={activeIndex === index}
-                onHover={() => setActiveIndex(index)}
-                onToggle={() =>
-                  setActiveIndex((current) =>
-                    current === index ? null : index
-                  )
-                }
-                prefersReducedMotion={prefersReducedMotion}
-              />
+                variants={fadeUp}
+                className="min-h-0 min-w-0"
+              >
+                <ServiceCard
+                  service={service}
+                  index={index}
+                  active={activeIndex === index}
+                  onHover={() => setActiveIndex(index)}
+                  onToggle={() =>
+                    setActiveIndex((current) =>
+                      current === index ? null : index
+                    )
+                  }
+                  prefersReducedMotion={prefersReducedMotion}
+                  hideSystemCursor={magneticEnabled}
+                />
+              </motion.div>
             ))}
           </div>
         </motion.div>
