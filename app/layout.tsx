@@ -32,7 +32,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "h-full antialiased light",
+        "h-full antialiased",
         montserrat.variable,
         outfit.variable,
         geistMono.variable

@@ -155,7 +155,7 @@ export function CameraIntro({ onPhaseChange, onComplete }: CameraIntroProps) {
       animate={{ opacity: isExiting ? 0 : 1 }}
       transition={overlayTransition}
     >
-      <div className="absolute inset-0 bg-[#0a0a0a]" />
+      <div className="absolute inset-0 bg-background" />
 
       <svg
         viewBox="-50 -50 100 100"
@@ -165,7 +165,7 @@ export function CameraIntro({ onPhaseChange, onComplete }: CameraIntroProps) {
         <motion.circle
           cx="0"
           cy="0"
-          fill="#0a0a0a"
+          className="fill-background"
           initial={{ r: 50 }}
           animate={{ r: apertureOpen ? 0 : 50 }}
           transition={{
@@ -195,7 +195,10 @@ export function CameraIntro({ onPhaseChange, onComplete }: CameraIntroProps) {
                     delay: index * 0.03,
                   }}
                 >
-                  <path d={wedge(0, 72, BLADE_SPREAD)} fill="#0a0a0a" />
+                  <path
+                    d={wedge(0, 72, BLADE_SPREAD)}
+                    className="fill-background"
+                  />
                 </motion.g>
               </motion.g>
             );
@@ -240,7 +243,7 @@ export function CameraIntro({ onPhaseChange, onComplete }: CameraIntroProps) {
           {isRecording ? (
             <>
               <motion.span
-                className="size-2.5 rounded-full bg-red-500"
+                className="size-2.5 rounded-full bg-rec"
                 animate={
                   prefersReducedMotion
                     ? { opacity: 1 }
@@ -252,7 +255,7 @@ export function CameraIntro({ onPhaseChange, onComplete }: CameraIntroProps) {
                   ease: "easeInOut",
                 }}
               />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-red-500">
+              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-rec">
                 REC
               </span>
             </>
@@ -281,7 +284,7 @@ export function CameraIntro({ onPhaseChange, onComplete }: CameraIntroProps) {
       </motion.div>
 
       <motion.div
-        className="absolute inset-0 z-40 bg-[radial-gradient(circle_at_center,transparent_35%,#0a0a0a_100%)]"
+        className="absolute inset-0 z-40 bg-[radial-gradient(circle_at_center,transparent_35%,var(--background)_100%)]"
         variants={hudVariants}
         initial="visible"
         animate={isExiting ? "hidden" : "visible"}
