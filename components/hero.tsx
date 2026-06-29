@@ -108,7 +108,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative z-30 mx-auto w-full max-w-[1440px] px-10 py-10 md:py-24 md:px-20 lg:px-24">
+      <div className="relative z-30 mx-auto w-full max-w-[1440px] px-6 py-10 md:py-24 md:px-20 lg:px-24">
         {/* Text content */}
         <div>
 

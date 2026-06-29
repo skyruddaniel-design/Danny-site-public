@@ -118,6 +118,7 @@ function ServiceCard({
   onToggle,
   prefersReducedMotion,
   hideSystemCursor,
+  hoverEnabled,
 }: {
   service: Service;
   index: number;
@@ -126,6 +127,7 @@ function ServiceCard({
   onToggle: () => void;
   prefersReducedMotion: boolean | null;
   hideSystemCursor?: boolean;
+  hoverEnabled?: boolean;
 }) {
   const contentTransition = prefersReducedMotion
     ? { duration: 0 }
@@ -149,8 +151,8 @@ function ServiceCard({
   return (
     <article
       data-magnetic-target
-      onMouseEnter={onHover}
-      onFocus={onHover}
+      onMouseEnter={hoverEnabled ? onHover : undefined}
+      onFocus={hoverEnabled ? onHover : undefined}
       onClick={onToggle}
       tabIndex={0}
       aria-expanded={active}
@@ -371,7 +373,7 @@ export function Services() {
                 "md:transition-[grid-template-columns] md:duration-700 md:ease-[cubic-bezier(0.32,0.72,0,1)]"
             )}
             style={{ gridTemplateColumns }}
-            onMouseLeave={() => setActiveIndex(null)}
+            onMouseLeave={isDesktop ? () => setActiveIndex(null) : undefined}
           >
             {SERVICES.map((service, index) => (
               <motion.div
@@ -391,6 +393,7 @@ export function Services() {
                   }
                   prefersReducedMotion={prefersReducedMotion}
                   hideSystemCursor={magneticEnabled}
+                  hoverEnabled={isDesktop}
                 />
               </motion.div>
             ))}

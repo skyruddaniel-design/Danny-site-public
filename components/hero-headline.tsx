@@ -107,8 +107,9 @@ type HeroHeadlineProps = {
 
 export function HeroHeadline({ active = true }: HeroHeadlineProps) {
   return (
-    <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-7xl font-heading">
+    <h1 className="text-6xl font-bold tracking-tight text-foreground md:text-7xl font-heading">
       Content that gets brands{" "}
+      <br className="block md:hidden" />
       <TypewriterHighlight
         active={active}
         className="text-primary"
