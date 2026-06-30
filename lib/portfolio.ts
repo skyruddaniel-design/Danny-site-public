@@ -38,35 +38,26 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   },
   
   {
-    id: "tiktok-lifestyle",
-    title: "Lifestyle montage",
+    id: "mann-pa-bussen",
+    title: "Mann på bussen",
     category: "TikTok edit",
     type: "tiktok",
-    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80",
-    previewSrc:
-      "https://assets.mixkit.co/videos/preview/mixkit-young-woman-taking-a-selfie-on-top-of-a-mountain-4230-large.mp4",
-    alt: "Vertical lifestyle montage with punchy transitions",
-    ratio: 9 / 16,
+    src: "/images/mann-pa-bussen-thumbnail.png",
+    previewSrc:"/videos/mann-pa-bussen-film.mp4",
+    alt: "Mann på bussen",
+    ratio: 4 / 5,
   },
   
   {
-    id: "product-still",
-    title: "Product launch stills",
+    id: "danny-cutie",
+    title: "Danny cutie",
     category: "Photography",
     type: "photography",
-    src: "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1200&q=80",
-    alt: "Photographer adjusting camera settings in studio",
+    src: "/images/danny-cutie.jpg",
+    alt: "Danny cutie",
     ratio: 4 / 5,
   },
-  {
-    id: "portrait-series",
-    title: "Executive portrait series",
-    category: "Photography",
-    type: "photography",
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80",
-    alt: "Professional portrait in natural light",
-    ratio: 4 / 5,
-  },
+  
 ];
 
 export function filterPortfolioItems(
