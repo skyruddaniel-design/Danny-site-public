@@ -140,10 +140,10 @@ export function SiteHeader() {
   return (
     <motion.header
       className={cn(
-        "fixed inset-x-0 top-0 transition-[background-color,backdrop-filter] duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter] duration-300",
         isTransparent
-          ? "z-30 bg-transparent"
-          : "z-50 border-b border-border bg-background/85 backdrop-blur-md",
+          ? "bg-transparent"
+          : "border-b border-border bg-background/85 backdrop-blur-md",
         !isVisible && "pointer-events-none"
       )}
       initial={false}

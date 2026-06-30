@@ -118,9 +118,9 @@ export function Hero() {
         }}
       />
 
-      <div className="relative z-30 mx-auto w-full max-w-[1440px] px-6 py-10 md:py-24 md:px-20 lg:px-24">
+      <div className="pointer-events-none relative z-10 mx-auto w-full max-w-[1440px] px-6 py-10 md:py-24 md:px-20 lg:px-24">
         {/* Text content */}
-        <div>
+        <div className="pointer-events-auto">
 
           <motion.div
             className="max-w-2xl"
@@ -175,7 +175,7 @@ export function Hero() {
         <Separator className="my-8" />
         {/* Video controls */}
         <motion.div
-          className="flex flex-wrap items-center gap-2"
+          className="pointer-events-auto flex flex-wrap items-center gap-2"
           initial="hidden"
           animate={introComplete ? "visible" : "hidden"}
           variants={fadeUp}
