@@ -67,15 +67,6 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     alt: "Professional portrait in natural light",
     ratio: 4 / 5,
   },
-  {
-    id: "brand-library",
-    title: "Brand image library",
-    category: "Photography",
-    type: "photography",
-    src: "https://images.unsplash.com/photo-1441986300917-6467bd60d8b?auto=format&fit=crop&w=1200&q=80",
-    alt: "Lifestyle product photography in a retail setting",
-    ratio: 4 / 5,
-  },
 ];
 
 export function filterPortfolioItems(

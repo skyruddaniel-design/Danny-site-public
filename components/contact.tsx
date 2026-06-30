@@ -26,13 +26,15 @@ import {
   useTransform,
 } from "motion/react";
 import { ArrowUpRight, Clock3, Mail } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const CONTACT_EMAIL = "daniel.skyrud@hotmail.com";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 const SERVICE_OPTIONS = [
   { value: "video", label: "Video" },
@@ -209,25 +211,36 @@ export function Contact() {
           >
             <motion.div
               variants={fadeUp}
-              className="min-w-0 border border-border bg-card/70 p-6 backdrop-blur-sm md:p-8"
+              className="min-w-0 overflow-hidden border border-border bg-card/70 backdrop-blur-sm"
             >
-              <p className="font-mono text-[10px] tracking-[0.22em] text-primary uppercase md:text-xs">
-                Direct line
-              </p>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="mt-4 flex min-w-0 items-start gap-3 font-heading text-lg font-semibold tracking-tight transition-colors hover:text-primary md:text-xl lg:text-2xl"
-              >
-                <Mail
-                  className="mt-0.5 size-5 shrink-0 text-primary"
-                  strokeWidth={1.75}
+              <div className="relative aspect-4/3 w-full border-b border-border">
+                <Image
+                  src="/images/danny-cutie.jpg"
+                  alt="Daniel Skyrud"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 360px"
+                  className="object-cover object-center"
                 />
-                <span className="min-w-0 break-all">{CONTACT_EMAIL}</span>
-              </a>
-              <p className="mt-5 text-sm leading-relaxed text-muted-foreground md:text-base">
-                Prefer email? Send over a brief, timeline, or reference links
-                and we&apos;ll pick up the conversation from there.
-              </p>
+              </div>
+              <div className="p-6 md:p-8">
+                <p className="font-mono text-[10px] tracking-[0.22em] text-primary uppercase md:text-xs">
+                  Direct line
+                </p>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="mt-4 flex min-w-0 items-start gap-3 font-heading text-lg font-semibold tracking-tight transition-colors hover:text-primary md:text-xl lg:text-2xl"
+                >
+                  <Mail
+                    className="mt-0.5 size-5 shrink-0 text-primary"
+                    strokeWidth={1.75}
+                  />
+                  <span className="min-w-0 break-all">{CONTACT_EMAIL}</span>
+                </a>
+                <p className="mt-5 text-sm leading-relaxed text-muted-foreground md:text-base">
+                  Prefer email? Send over a brief, timeline, or reference links
+                  and we&apos;ll pick up the conversation from there.
+                </p>
+              </div>
             </motion.div>
 
             <motion.div
@@ -367,7 +380,7 @@ export function Contact() {
                           >
                             <SelectValue placeholder="What do you need?" />
                           </SelectTrigger>
-                          <SelectContent alignItemWithTrigger>
+                          <SelectContent align="start" alignItemWithTrigger={false}>
                             {SERVICE_OPTIONS.map((option) => (
                               <SelectItem
                                 key={option.value}
@@ -440,6 +453,18 @@ export function Contact() {
                     </p>
                   )}
                 </div>
+
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  By submitting this form, you agree that we may process your
+                  details to respond to your inquiry. Read our{" "}
+                  <Link
+                    href="/privacy"
+                    className="font-medium text-foreground underline-offset-4 hover:text-primary hover:underline"
+                  >
+                    privacy policy
+                  </Link>
+                  .
+                </p>
               </form>
             </motion.div>
           </motion.div>

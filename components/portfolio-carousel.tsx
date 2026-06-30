@@ -37,7 +37,7 @@ export function PortfolioCarousel({
 }: PortfolioCarouselProps) {
   const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const didDragRef = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -45,7 +45,8 @@ export function PortfolioCarousel({
   const progressWidth = useTransform(progress, (value) => `${value * 100}%`);
 
   const total = items.length;
-  const autoplayEnabled = !prefersReducedMotion && total > 1 && !isPaused;
+  const autoplayEnabled =
+    !prefersReducedMotion && total > 1 && !isAutoplayPaused;
 
   const goTo = useCallback(
     (index: number) => {
@@ -116,7 +117,7 @@ export function PortfolioCarousel({
   }, [activeIndex]);
 
   useEffect(() => {
-    if (!activeIsVideo || !hasActivePreview || prefersReducedMotion || isPaused) {
+    if (!activeIsVideo || !hasActivePreview || prefersReducedMotion) {
       videoRef.current?.pause();
       setIsPlaying(false);
       return;
@@ -126,23 +127,18 @@ export function PortfolioCarousel({
     if (!video) return;
 
     void video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
-  }, [
-    activeIndex,
-    activeIsVideo,
-    hasActivePreview,
-    isPaused,
-    prefersReducedMotion,
-  ]);
+  }, [activeIndex, activeIsVideo, hasActivePreview, prefersReducedMotion]);
 
   return (
-    <div
-      className={cn("flex h-full w-full flex-col", className)}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={() => setIsPaused(false)}
-    >
-      <div className="relative min-h-0 flex-1 overflow-hidden border border-border bg-card">
+    <div className={cn("flex h-full w-full flex-col", className)}>
+      <div
+        className="flex min-h-0 flex-1 flex-col overflow-hidden border border-border bg-card"
+        onMouseEnter={() => setIsAutoplayPaused(true)}
+        onMouseLeave={() => setIsAutoplayPaused(false)}
+        onFocusCapture={() => setIsAutoplayPaused(true)}
+        onBlurCapture={() => setIsAutoplayPaused(false)}
+      >
+        <div className="relative min-h-0 flex-1 overflow-hidden">
         <motion.div
           key={activeItem.id}
           className="absolute inset-0 touch-pan-y"
@@ -179,7 +175,7 @@ export function PortfolioCarousel({
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
               className={cn(
                 "absolute inset-0 size-full object-cover transition-opacity duration-300",
                 isPlaying ? "opacity-100" : "opacity-0"
@@ -224,16 +220,17 @@ export function PortfolioCarousel({
             </button>
           </>
         )}
-      </div>
-
-      {showVideoActions ? (
-        <div className="mt-3 border border-border border-t-0 bg-card/95 px-4 py-3">
-          <PortfolioVideoActions
-            item={activeItem}
-            onOpenPreview={onOpenPreview}
-          />
         </div>
-      ) : null}
+
+        {showVideoActions ? (
+          <div className="border-t border-border bg-card/95 p-4">
+            <PortfolioVideoActions
+              item={activeItem}
+              onOpenPreview={onOpenPreview}
+            />
+          </div>
+        ) : null}
+      </div>
 
       {total > 1 && (
         <div
