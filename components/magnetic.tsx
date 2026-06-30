@@ -1,11 +1,16 @@
 "use client";
 
-import { motion, useReducedMotion, useSpring, useTransform } from "motion/react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import { useEffect, useRef, type RefObject } from "react";
 
-const dotSpring = { stiffness: 500, damping: 42, mass: 0.3 };
-const frameSpring = { stiffness: 320, damping: 34, mass: 0.35 };
-const rotateSpring = { stiffness: 260, damping: 28, mass: 0.4 };
+const frameSpring = { stiffness: 900, damping: 52, mass: 0.12 };
+const rotateSpring = { stiffness: 650, damping: 42, mass: 0.15 };
 
 const IDLE_SIZE = 36;
 const FRAME_INSET = 4;
@@ -23,15 +28,15 @@ export function MagneticTargetCursor({
   const prefersReducedMotion = useReducedMotion();
   const active = enabled && !prefersReducedMotion;
 
-  const dotX = useSpring(0, dotSpring);
-  const dotY = useSpring(0, dotSpring);
+  const dotX = useMotionValue(0);
+  const dotY = useMotionValue(0);
   const frameLeft = useSpring(0, frameSpring);
   const frameTop = useSpring(0, frameSpring);
   const frameWidth = useSpring(IDLE_SIZE, frameSpring);
   const frameHeight = useSpring(IDLE_SIZE, frameSpring);
   const frameRotate = useSpring(0, rotateSpring);
-  const opacity = useSpring(0, { stiffness: 400, damping: 40 });
-  const onCard = useSpring(0, { stiffness: 420, damping: 38, mass: 0.3 });
+  const opacity = useMotionValue(0);
+  const onCard = useMotionValue(0);
   const dotPrimaryOpacity = useTransform(onCard, [0, 1], [1, 0]);
   const dotWhiteOpacity = useTransform(onCard, [0, 1], [0, 1]);
 
@@ -87,12 +92,12 @@ export function MagneticTargetCursor({
       const dy = y - prev.y;
       const speed = Math.hypot(dx, dy);
 
-      if (speed > 0.6) {
+      if (speed > 0.4) {
         const movementAngle = (Math.atan2(dy, dx) * 180) / Math.PI + 45;
-        rotateRef.current = rotateRef.current * 0.78 + movementAngle * 0.22;
+        rotateRef.current = rotateRef.current * 0.55 + movementAngle * 0.45;
       } else {
         rotateRef.current =
-          rotateRef.current * 0.9 + DEFAULT_IDLE_ROT * 0.1;
+          rotateRef.current * 0.82 + DEFAULT_IDLE_ROT * 0.18;
       }
 
       prevRef.current = { x, y };
@@ -115,42 +120,35 @@ export function MagneticTargetCursor({
       s.frameRotate.set(0);
     };
 
-    const updateFromPointer = (clientX: number, clientY: number) => {
-      const sectionRect = container.getBoundingClientRect();
-      const x = clientX - sectionRect.left;
-      const y = clientY - sectionRect.top;
-      const s = springsRef.current;
-
-      s.dotX.set(x);
-      s.dotY.set(y);
-      s.opacity.set(1);
-
-      const hit = document.elementFromPoint(clientX, clientY);
-      const target = hit?.closest("[data-magnetic-target]");
-      const isOnCard = Boolean(target && container.contains(target));
-
-      s.onCard.set(isOnCard ? 1 : 0);
-
-      if (isOnCard && target) {
-        setTargetFrame(target, sectionRect);
-      } else {
-        setIdleFrame(x, y);
-      }
-    };
-
     let rafId = 0;
     let lastClientX = 0;
     let lastClientY = 0;
     let onTarget = false;
+    let tracking = false;
 
     const tick = () => {
-      if (onTarget) {
+      if (tracking) {
         const sectionRect = container.getBoundingClientRect();
-        const hit = document.elementFromPoint(lastClientX, lastClientY);
-        const target = hit?.closest("[data-magnetic-target]");
+        const x = lastClientX - sectionRect.left;
+        const y = lastClientY - sectionRect.top;
+        const s = springsRef.current;
 
-        if (target && container.contains(target)) {
-          setTargetFrame(target, sectionRect);
+        s.dotX.set(x);
+        s.dotY.set(y);
+
+        if (onTarget) {
+          const hit = document.elementFromPoint(lastClientX, lastClientY);
+          const target = hit?.closest("[data-magnetic-target]");
+
+          if (target && container.contains(target)) {
+            setTargetFrame(target, sectionRect);
+          } else {
+            onTarget = false;
+            s.onCard.set(0);
+            setIdleFrame(x, y);
+          }
+        } else {
+          setIdleFrame(x, y);
         }
       }
 
@@ -163,17 +161,23 @@ export function MagneticTargetCursor({
 
       const hit = document.elementFromPoint(event.clientX, event.clientY);
       const target = hit?.closest("[data-magnetic-target]");
-      onTarget = Boolean(target && container.contains(target));
+      const isOnCard = Boolean(target && container.contains(target));
 
-      updateFromPointer(event.clientX, event.clientY);
+      onTarget = isOnCard;
+      springsRef.current.onCard.set(isOnCard ? 1 : 0);
     };
 
-    const handlePointerEnter = () => {
+    const handlePointerEnter = (event: PointerEvent) => {
+      lastClientX = event.clientX;
+      lastClientY = event.clientY;
+      tracking = true;
+      springsRef.current.opacity.set(1);
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(tick);
     };
 
     const handlePointerLeave = () => {
+      tracking = false;
       cancelAnimationFrame(rafId);
       onTarget = false;
       rotateRef.current = DEFAULT_IDLE_ROT;
@@ -182,7 +186,9 @@ export function MagneticTargetCursor({
       springsRef.current.onCard.set(0);
     };
 
-    container.addEventListener("pointermove", handlePointerMove);
+    container.addEventListener("pointermove", handlePointerMove, {
+      passive: true,
+    });
     container.addEventListener("pointerenter", handlePointerEnter);
     container.addEventListener("pointerleave", handlePointerLeave);
 
