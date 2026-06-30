@@ -182,7 +182,7 @@ function ServiceCard({
         transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease }}
       />
 
-      <div className="absolute inset-0 flex flex-col justify-between p-5 md:p-7">
+      <div className="dark absolute inset-0 flex flex-col justify-between p-5 md:p-7">
         <span className="font-mono text-[11px] tracking-[0.22em] text-white/55 uppercase">
           {String(index + 1).padStart(2, "0")}
         </span>
@@ -190,7 +190,7 @@ function ServiceCard({
         <div className="min-w-0">
           <h3
             className={cn(
-              "font-heading font-semibold tracking-tight text-white transition-[font-size] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+              "font-heading font-semibold tracking-tight text-foreground transition-[font-size] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
               active ? "text-3xl md:text-4xl" : "text-2xl md:text-[1.65rem]"
             )}
           >
