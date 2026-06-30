@@ -56,6 +56,7 @@ body {
 }
 
 :root {
+  --site-header-height: 4rem;
   --background: oklch(0.985 0.008 90);
   --foreground: oklch(0.14 0.02 265);
   --card: oklch(0.97 0.01 90);
@@ -147,6 +148,12 @@ body {
   h5,
   h6 {
     @apply font-heading;
+  }
+
+  #services,
+  #process,
+  #contact {
+    scroll-margin-top: var(--site-header-height);
   }
 }
 

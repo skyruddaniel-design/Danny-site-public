@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
+import { SITE_HEADER_HEIGHT } from "@/lib/site";
 import { useReducedMotion } from "motion/react";
 import type { VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react";
@@ -18,7 +19,7 @@ export function scrollToSection(
   const element = document.getElementById(targetId);
   if (!element) return;
 
-  const offset = options?.offset ?? 0;
+  const offset = options?.offset ?? SITE_HEADER_HEIGHT;
   const smooth = options?.smooth ?? true;
   const top = element.getBoundingClientRect().top + window.scrollY - offset;
 
@@ -30,7 +31,7 @@ export function scrollToSection(
 
 export function ScrollPageButton({
   targetId,
-  offset = 0,
+  offset = SITE_HEADER_HEIGHT,
   onClick,
   ...props
 }: ScrollPageButtonProps) {

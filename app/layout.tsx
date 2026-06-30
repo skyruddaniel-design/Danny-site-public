@@ -1,4 +1,7 @@
 import { Footer } from "@/components/footer";
+import { HeroIntroProvider } from "@/components/hero-intro-context";
+import { SectionHashScroll } from "@/components/section-hash-scroll";
+import { SiteHeader } from "@/components/site-header";
 import { SITE_NAME } from "@/lib/site";
 import type { Metadata } from "next";
 import { Geist_Mono, Montserrat, Outfit } from "next/font/google";
@@ -42,8 +45,12 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body className="flex min-h-screen flex-col font-sans">
-        <div className="flex-1">{children}</div>
-        <Footer />
+        <HeroIntroProvider>
+          <SectionHashScroll />
+          <SiteHeader />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </HeroIntroProvider>
       </body>
     </html>
   );

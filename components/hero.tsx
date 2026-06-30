@@ -4,6 +4,7 @@ import {
   CameraIntro,
   type CameraIntroPhase,
 } from "@/components/camera-intro";
+import { useHeroIntro } from "@/components/hero-intro-context";
 import { HeroHeadline } from "@/components/hero-headline";
 import { ScrollPageButton } from "@/components/scroll-page-button";
 import { VideoPlayerControls } from "@/components/video-player-controls";
@@ -20,9 +21,11 @@ const zoomEase = [0.83, 0, 0.17, 1] as const;
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const { setIntroComplete } = useHeroIntro();
   const [introPhase, setIntroPhase] = useState<CameraIntroPhase>("standby");
-  const [introComplete, setIntroComplete] = useState(false);
+  const [introComplete, setIntroCompleteLocal] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   const {
     isPlaying,
     isMuted,
@@ -36,9 +39,10 @@ export function Hero() {
   useEffect(() => {
     if (prefersReducedMotion) {
       setIntroPhase("done");
+      setIntroCompleteLocal(true);
       setIntroComplete(true);
     }
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, setIntroComplete]);
 
   const isZooming =
     introPhase === "recording" ||
@@ -57,7 +61,10 @@ export function Hero() {
     };
 
   return (
-    <section className="dark relative flex min-h-svh w-full items-end overflow-hidden bg-background">
+    <section
+      id="hero"
+      className="dark relative flex min-h-svh w-full items-end overflow-hidden bg-background"
+    >
 
       {/* Video */}
       <motion.div
@@ -92,7 +99,10 @@ export function Hero() {
       {/* Camera intro */}
       <CameraIntro
         onPhaseChange={setIntroPhase}
-        onComplete={() => setIntroComplete(true)}
+        onComplete={() => {
+          setIntroCompleteLocal(true);
+          setIntroComplete(true);
+        }}
       />
 
       {/* Camera overlay */}

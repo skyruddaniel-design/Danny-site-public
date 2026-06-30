@@ -148,7 +148,7 @@ export function PortfolioPage() {
         enabled={parallaxEnabled}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-6 py-20 md:px-12 md:py-24 lg:px-16">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-6 py-24 md:px-12 md:py-28 lg:px-16">
         <motion.div
           style={parallaxEnabled ? { y: headerY } : undefined}
           className="relative"
