@@ -179,7 +179,7 @@ export function Hero() {
           </motion.div>
         </div>
 
-        <Separator className="my-8" />
+        <Separator className="mt-4 mb-2 sm:my-8" />
         {/* Video controls */}
         <motion.div
           className="pointer-events-auto flex flex-wrap items-center gap-2"
