@@ -51,9 +51,9 @@ export function PortfolioWatchLink({
       {viewfinderMode !== "none" && (
         <ViewfinderDecor mode={viewfinderMode} />
       )}
-      <ViewfinderContent>
-        {linkLabel}
-        <ArrowUpRight className="size-3.5" />
+      <ViewfinderContent className="max-md:min-w-0 max-md:flex-wrap max-md:justify-center max-md:gap-0.5">
+        <span className="text-center">{linkLabel}</span>
+        <ArrowUpRight className="size-3 md:size-3.5" />
       </ViewfinderContent>
     </a>
   );

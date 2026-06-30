@@ -42,7 +42,7 @@ export function PortfolioVideoActions({
   return (
     <div
       className={cn(
-        "flex flex-wrap gap-4",
+        "flex flex-nowrap items-stretch gap-2 md:flex-wrap md:gap-4",
         align === "end" && "justify-end",
         align === "start" && "justify-start",
         align === "between" && "justify-between",
@@ -55,16 +55,22 @@ export function PortfolioVideoActions({
           variant="outline"
           size="sm"
           data-icon="inline-start"
+          className="min-w-0 max-md:h-auto max-md:min-h-8 max-md:flex-1 max-md:flex-wrap max-md:justify-center max-md:px-2 max-md:py-1.5 max-md:text-[10px] max-md:leading-tight max-md:tracking-[0.12em] max-md:whitespace-normal md:flex-none"
           onClick={(event) => {
             event.stopPropagation();
             openPreview();
           }}
         >
-          <Play className="size-3.5 fill-current" />
+          <Play className="size-3 fill-current md:size-3.5" />
           {t("actions.viewPreview")}
         </Button>
       ) : null}
-      {hasWatchLink ? <PortfolioWatchLink item={item} /> : null}
+      {hasWatchLink ? (
+        <PortfolioWatchLink
+          item={item}
+          className="min-w-0 max-md:h-auto max-md:min-h-8 max-md:flex-1 max-md:flex-wrap max-md:justify-center max-md:px-2 max-md:py-1.5 max-md:text-[10px] max-md:leading-tight max-md:tracking-[0.12em] max-md:whitespace-normal md:flex-none"
+        />
+      ) : null}
     </div>
   );
 }

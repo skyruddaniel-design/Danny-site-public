@@ -132,7 +132,7 @@ export function PortfolioMediaCard({
       </div>
 
       {isVideo && (hasPreview || hasWatchLink) ? (
-        <div className="border-t border-border bg-card/95 p-4">
+        <div className="border-t border-border bg-card/95 p-3 md:p-4">
           <PortfolioVideoActions item={item} onOpenPreview={onOpenPreview} />
         </div>
       ) : null}
