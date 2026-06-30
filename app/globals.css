@@ -171,9 +171,9 @@ body {
 }
 
 .services-texture-image {
-  background-image: url("/images/background-texture.jpg");
-  background-size: cover;
+  background-image: url("/images/background-texture-1.jpg");
   background-position: center;
+  background-size: cover;
   opacity: 0.22;
   mix-blend-mode: multiply;
 }

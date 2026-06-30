@@ -32,22 +32,21 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     type: "short-film",
     src: "/images/ai-tar-over-verden-thumbnail.jpeg",
     previewSrc: "/videos/ai-tar-over-verden-film.mp4",
-    watchUrl: "https://www.tiktok.com/@toppetasjen.films/video/7561120711612321046",
+    watchUrl:
+      "https://www.tiktok.com/@toppetasjen.films/video/7561120711612321046",
     alt: "Ai tar over verden",
     ratio: 16 / 9,
   },
-  
   {
     id: "mann-pa-bussen",
     title: "Mann på bussen",
     category: "TikTok edit",
     type: "tiktok",
     src: "/images/mann-pa-bussen-thumbnail.png",
-    previewSrc:"/videos/mann-pa-bussen-film.mp4",
+    previewSrc: "/videos/mann-pa-bussen-film.mp4",
     alt: "Mann på bussen",
     ratio: 4 / 5,
   },
-  
   {
     id: "danny-cutie",
     title: "Danny cutie",
@@ -57,7 +56,6 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     alt: "Danny cutie",
     ratio: 4 / 5,
   },
-  
 ];
 
 export function filterPortfolioItems(
