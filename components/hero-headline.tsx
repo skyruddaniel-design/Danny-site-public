@@ -88,7 +88,7 @@ export function TypewriterHighlight({
       {active && !prefersReducedMotion && (
         <motion.span
           aria-hidden
-          className="ml-1 inline-block h-[0.85em] w-[3px] translate-y-px bg-primary align-middle"
+          className="ml-1 inline-block h-[0.75em] w-[3px] translate-y-px bg-primary align-baseline"
           animate={{ opacity: [1, 0.2, 1] }}
           transition={{
             duration: 1,
