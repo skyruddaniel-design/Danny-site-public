@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -27,8 +28,8 @@ import {
 } from "motion/react";
 import { ArrowUpRight, Clock3, Mail } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useMemo, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -36,25 +37,21 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 import { CONTACT_EMAIL } from "@/lib/site";
 
-const SERVICE_OPTIONS = [
-  { value: "video", label: "Video" },
-  { value: "photography", label: "Photography" },
-  { value: "strategy", label: "Strategy" },
-  { value: "post-production", label: "Post Production" },
-  { value: "not-sure", label: "Not sure yet" },
+const SERVICE_OPTION_VALUES = [
+  "video",
+  "photography",
+  "strategy",
+  "post-production",
+  "not-sure",
 ] as const;
 
-const contactFormSchema = z.object({
-  name: z.string().min(1, "Please enter your name."),
-  email: z.string().email("Please enter a valid email address."),
-  company: z.string().optional(),
-  service: z.string().min(1, "Please select a service."),
-  message: z
-    .string()
-    .min(10, "Please share a bit more about your project."),
-});
-
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+type ContactFormValues = {
+  name: string;
+  email: string;
+  company?: string;
+  service: string;
+  message: string;
+};
 
 const fieldLabelClassName =
   "font-mono text-[10px] tracking-[0.22em] text-primary uppercase md:text-xs";
@@ -63,12 +60,36 @@ const fieldControlClassName =
   "border border-border bg-background/80 px-3 focus-visible:border-primary focus-visible:border-b-primary";
 
 export function Contact() {
+  const t = useTranslations("contact");
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const [submitState, setSubmitState] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [submitError, setSubmitError] = useState("");
+
+  const contactFormSchema = useMemo(
+    () =>
+      z.object({
+        name: z.string().min(1, t("validation.name")),
+        email: z.string().email(t("validation.email")),
+        company: z.string().optional(),
+        service: z.string().min(1, t("validation.service")),
+        message: z.string().min(10, t("validation.message")),
+      }),
+    [t]
+  );
+
+  const serviceOptions = useMemo(
+    () =>
+      SERVICE_OPTION_VALUES.map((value) => ({
+        value,
+        label: t(
+          `form.serviceOptions.${value === "post-production" ? "postProduction" : value === "not-sure" ? "notSure" : value}`
+        ),
+      })),
+    [t]
+  );
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -127,7 +148,7 @@ export function Contact() {
     setSubmitError("");
 
     const serviceLabel =
-      SERVICE_OPTIONS.find((option) => option.value === values.service)
+      serviceOptions.find((option) => option.value === values.service)
         ?.label ?? values.service;
 
     try {
@@ -143,7 +164,7 @@ export function Contact() {
       const data = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        throw new Error(data.error ?? "Something went wrong. Please try again.");
+        throw new Error(data.error ?? t("error.generic"));
       }
 
       form.reset();
@@ -151,9 +172,7 @@ export function Contact() {
     } catch (error) {
       setSubmitState("error");
       setSubmitError(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong. Please try again."
+        error instanceof Error ? error.message : t("error.generic")
       );
     }
   };
@@ -181,11 +200,10 @@ export function Contact() {
           <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
             <motion.div variants={fadeUp} className="relative z-10 max-w-xl">
               <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl md:leading-[1.1]">
-                Let&apos;s talk about your project
+                {t("heading")}
               </h2>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
-                Share a few details and we&apos;ll get back to you with next
-                steps — usually within one business day.
+                {t("intro")}
               </p>
             </motion.div>
 
@@ -195,7 +213,7 @@ export function Contact() {
                 className="pointer-events-none shrink-0 self-start font-heading text-[clamp(3.5rem,10vw,7.5rem)] leading-[0.85] font-bold tracking-tighter text-foreground/10 uppercase select-none md:pt-1 md:text-right"
                 style={parallaxEnabled ? { y: watermarkY } : undefined}
               >
-                Contact
+                {t("watermark")}
               </motion.p>
             </motion.div>
           </div>
@@ -216,7 +234,7 @@ export function Contact() {
               <div className="relative aspect-4/3 w-full border-b border-border">
                 <Image
                   src="/images/danny-cutie.jpg"
-                  alt="Daniel Skyrud"
+                  alt={t("sidebar.imageAlt")}
                   fill
                   sizes="(max-width: 768px) 100vw, 360px"
                   className="object-cover object-center"
@@ -224,7 +242,7 @@ export function Contact() {
               </div>
               <div className="p-6 md:p-8">
                 <p className="font-mono text-[10px] tracking-[0.22em] text-primary uppercase md:text-xs">
-                  Direct line
+                  {t("sidebar.directLine")}
                 </p>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
@@ -237,8 +255,7 @@ export function Contact() {
                   <span className="min-w-0 break-all">{CONTACT_EMAIL}</span>
                 </a>
                 <p className="mt-5 text-sm leading-relaxed text-muted-foreground md:text-base">
-                  Prefer email? Send over a brief, timeline, or reference links
-                  and we&apos;ll pick up the conversation from there.
+                  {t("sidebar.emailNote")}
                 </p>
               </div>
             </motion.div>
@@ -253,7 +270,7 @@ export function Contact() {
                 aria-hidden
               />
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Typical response time is within 24 hours on business days.
+                {t("sidebar.responseTime")}
               </p>
             </motion.div>
           </motion.aside>
@@ -284,13 +301,13 @@ export function Contact() {
                           htmlFor="contact-name"
                           className={fieldLabelClassName}
                         >
-                          Name
+                          {t("form.name")}
                         </FieldLabel>
                         <Input
                           {...field}
                           id="contact-name"
                           autoComplete="name"
-                          placeholder="Your name"
+                          placeholder={t("form.placeholders.name")}
                           aria-invalid={fieldState.invalid}
                           className={cn(fieldControlClassName, "h-11")}
                         />
@@ -310,14 +327,14 @@ export function Contact() {
                           htmlFor="contact-email"
                           className={fieldLabelClassName}
                         >
-                          Email
+                          {t("form.email")}
                         </FieldLabel>
                         <Input
                           {...field}
                           id="contact-email"
                           type="email"
                           autoComplete="email"
-                          placeholder="you@company.com"
+                          placeholder={t("form.placeholders.email")}
                           aria-invalid={fieldState.invalid}
                           className={cn(fieldControlClassName, "h-11")}
                         />
@@ -337,13 +354,13 @@ export function Contact() {
                           htmlFor="contact-company"
                           className={fieldLabelClassName}
                         >
-                          Company
+                          {t("form.company")}
                         </FieldLabel>
                         <Input
                           {...field}
                           id="contact-company"
                           autoComplete="organization"
-                          placeholder="Optional"
+                          placeholder={t("form.placeholders.company")}
                           aria-invalid={fieldState.invalid}
                           className={cn(fieldControlClassName, "h-11")}
                         />
@@ -363,7 +380,7 @@ export function Contact() {
                           htmlFor="contact-service"
                           className={fieldLabelClassName}
                         >
-                          Service
+                          {t("form.service")}
                         </FieldLabel>
                         <Select
                           name={field.name}
@@ -378,10 +395,10 @@ export function Contact() {
                               "w-full data-[size=default]:h-11"
                             )}
                           >
-                            <SelectValue placeholder="What do you need?" />
+                            <SelectValue placeholder={t("form.placeholders.service")} />
                           </SelectTrigger>
                           <SelectContent align="start" alignItemWithTrigger={false}>
-                            {SERVICE_OPTIONS.map((option) => (
+                            {serviceOptions.map((option) => (
                               <SelectItem
                                 key={option.value}
                                 value={option.value}
@@ -410,12 +427,12 @@ export function Contact() {
                           htmlFor="contact-message"
                           className={fieldLabelClassName}
                         >
-                          Project details
+                          {t("form.message")}
                         </FieldLabel>
                         <Textarea
                           {...field}
                           id="contact-message"
-                          placeholder="Tell us about the project, timeline, and where the content will be used."
+                          placeholder={t("form.placeholders.message")}
                           aria-invalid={fieldState.invalid}
                           className={cn(
                             fieldControlClassName,
@@ -437,13 +454,15 @@ export function Contact() {
                     disabled={submitState === "loading"}
                     data-icon="inline-end"
                   >
-                    {submitState === "loading" ? "Sending..." : "Send message"}
+                    {submitState === "loading"
+                      ? t("form.sending")
+                      : t("form.submit")}
                     <ArrowUpRight className="size-4" />
                   </Button>
 
                   {submitState === "success" && (
                     <p role="status" className="text-sm text-primary">
-                      Message sent — we&apos;ll be in touch soon.
+                      {t("form.success")}
                     </p>
                   )}
 
@@ -455,13 +474,12 @@ export function Contact() {
                 </div>
 
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  By submitting this form, you agree that we may process your
-                  details to respond to your inquiry. Read our{" "}
+                  {t("form.privacyBefore")}{" "}
                   <Link
                     href="/privacy"
                     className="font-medium text-foreground underline-offset-4 hover:text-primary hover:underline"
                   >
-                    privacy policy
+                    {t("form.privacyLink")}
                   </Link>
                   .
                 </p>

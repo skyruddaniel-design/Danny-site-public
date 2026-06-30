@@ -1,7 +1,7 @@
 "use client";
 
 import { scrollToSection } from "@/components/scroll-page-button";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { useEffect } from "react";
 
 const SECTION_IDS = new Set(["services", "process", "contact"]);

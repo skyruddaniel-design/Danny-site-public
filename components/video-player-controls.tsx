@@ -5,6 +5,7 @@ import { VolumeIcon } from "@/components/icons/volume-icon";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { RotateCcw, SkipBack, SkipForward } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type VideoPlayerControlsProps = {
   isPlaying: boolean;
@@ -29,13 +30,15 @@ export function VideoPlayerControls({
   skipSeconds = 10,
   className,
 }: VideoPlayerControlsProps) {
+  const t = useTranslations("a11y.video");
+
   return (
     <div className={cn("flex flex-wrap items-center gap-2", className)}>
       <Button
         variant="outline"
         size="icon"
         onClick={onRestart}
-        aria-label="Restart video"
+        aria-label={t("restart")}
       >
         <RotateCcw className="size-5" />
       </Button>
@@ -43,7 +46,7 @@ export function VideoPlayerControls({
         variant="outline"
         size="icon"
         onClick={onSeekBack}
-        aria-label={`Skip back ${skipSeconds} seconds`}
+        aria-label={t("skipBack", { seconds: skipSeconds })}
       >
         <SkipBack className="size-5" />
       </Button>
@@ -51,7 +54,7 @@ export function VideoPlayerControls({
         variant="outline"
         size="icon"
         onClick={onTogglePlay}
-        aria-label={isPlaying ? "Pause video" : "Play video"}
+        aria-label={isPlaying ? t("pause") : t("play")}
       >
         <PlayPauseIcon playing={isPlaying} />
       </Button>
@@ -59,7 +62,7 @@ export function VideoPlayerControls({
         variant="outline"
         size="icon"
         onClick={onSeekForward}
-        aria-label={`Skip forward ${skipSeconds} seconds`}
+        aria-label={t("skipForward", { seconds: skipSeconds })}
       >
         <SkipForward className="size-5" />
       </Button>
@@ -67,7 +70,7 @@ export function VideoPlayerControls({
         variant="outline"
         size="icon"
         onClick={onToggleMute}
-        aria-label={isMuted ? "Unmute video" : "Mute video"}
+        aria-label={isMuted ? t("unmute") : t("mute")}
       >
         <VolumeIcon muted={isMuted} />
       </Button>

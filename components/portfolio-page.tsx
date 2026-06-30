@@ -8,10 +8,10 @@ import { ViewfinderLink } from "@/components/ui/viewfinder-link";
 import {
   filterPortfolioItems,
   groupPortfolioItems,
-  PORTFOLIO_FILTERS,
+  localizePortfolioItems,
   PORTFOLIO_ITEMS,
+  type LocalizedPortfolioItem,
   type PortfolioFilter,
-  type PortfolioItem,
 } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 import {
@@ -21,9 +21,24 @@ import {
   useTransform,
 } from "motion/react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useMemo, useRef, useState, type ReactNode } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+const PORTFOLIO_FILTER_VALUES: PortfolioFilter[] = [
+  "all",
+  "short-film",
+  "tiktok",
+  "photography",
+];
+
+const FILTER_MESSAGE_KEYS: Record<PortfolioFilter, string> = {
+  all: "filters.all",
+  "short-film": "filters.shortFilm",
+  tiktok: "filters.tiktok",
+  photography: "filters.photography",
+};
 
 function PortfolioSection({
   title,
@@ -77,10 +92,13 @@ function PortfolioSection({
 }
 
 export function PortfolioPage() {
+  const t = useTranslations("portfolio");
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const [filter, setFilter] = useState<PortfolioFilter>("all");
-  const [previewItem, setPreviewItem] = useState<PortfolioItem | null>(null);
+  const [previewItem, setPreviewItem] = useState<LocalizedPortfolioItem | null>(
+    null
+  );
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -91,9 +109,14 @@ export function PortfolioPage() {
   const watermarkY = useTransform(scrollYProgress, [0, 1], [16, -24]);
   const parallaxEnabled = !prefersReducedMotion;
 
+  const localizedItems = useMemo(
+    () => localizePortfolioItems(PORTFOLIO_ITEMS, t),
+    [t]
+  );
+
   const filteredItems = useMemo(
-    () => filterPortfolioItems(PORTFOLIO_ITEMS, filter),
-    [filter]
+    () => filterPortfolioItems(localizedItems, filter),
+    [localizedItems, filter]
   );
 
   const { shortFilms, tiktok, photography } = useMemo(
@@ -165,14 +188,13 @@ export function PortfolioPage() {
                 className="mb-6 inline-flex"
               >
                 <ArrowLeft className="size-4" />
-                Back to process
+                {t("backToProcess")}
               </ViewfinderLink>
               <h1 className="font-heading text-3xl font-bold tracking-tight md:text-5xl md:leading-[1.1]">
-                Selected work
+                {t("heading")}
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                Short films, TikTok edits, and photography — the kind of work we
-                deliver from first brief to final export.
+                {t("intro")}
               </p>
             </motion.div>
 
@@ -182,7 +204,7 @@ export function PortfolioPage() {
                 className="pointer-events-none shrink-0 self-start font-heading text-[clamp(3.5rem,10vw,7.5rem)] leading-[0.85] font-bold tracking-tighter text-foreground/10 uppercase select-none md:pt-1 md:text-right"
                 style={parallaxEnabled ? { y: watermarkY } : undefined}
               >
-                Portfolio
+                {t("watermark")}
               </motion.p>
             </motion.div>
           </div>
@@ -194,9 +216,9 @@ export function PortfolioPage() {
           animate="visible"
           className="mt-10 flex flex-wrap gap-2 md:mt-12"
           role="tablist"
-          aria-label="Filter portfolio"
+          aria-label={t("filters.label")}
         >
-          {PORTFOLIO_FILTERS.map(({ value, label }) => {
+          {PORTFOLIO_FILTER_VALUES.map((value) => {
             const isActive = filter === value;
 
             return (
@@ -213,7 +235,7 @@ export function PortfolioPage() {
                     : "border-border bg-card/60 text-muted-foreground hover:border-primary/40 hover:text-foreground"
                 )}
               >
-                {label}
+                {t(FILTER_MESSAGE_KEYS[value])}
               </button>
             );
           })}
@@ -221,9 +243,9 @@ export function PortfolioPage() {
 
         {showShortFilms && shortFilms.length > 0 ? (
           <PortfolioSection
-            title="Short films"
+            title={t("sections.shortFilms.title")}
             showHeading={showSectionHeadings}
-            description="Cinematic edits and brand films — hover to preview, built for web and presentations."
+            description={t("sections.shortFilms.description")}
           >
             <motion.div
               className="grid gap-4 lg:grid-cols-2 lg:gap-5"
@@ -247,9 +269,9 @@ export function PortfolioPage() {
 
         {showTiktok && tiktok.length > 0 ? (
           <PortfolioSection
-            title="TikTok edits"
+            title={t("sections.tiktok.title")}
             showHeading={showSectionHeadings}
-            description="Fast, vertical cuts tuned for retention — scroll through recent social edits."
+            description={t("sections.tiktok.description")}
           >
             <PortfolioReelsStrip
               items={tiktok}
@@ -260,9 +282,9 @@ export function PortfolioPage() {
 
         {showPhotography && photography.length > 0 ? (
           <PortfolioSection
-            title="Photography"
+            title={t("sections.photography.title")}
             showHeading={showSectionHeadings}
-            description="Stills and image libraries for brands that need consistency across every channel."
+            description={t("sections.photography.description")}
           >
             <motion.div
               className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5"
@@ -284,7 +306,7 @@ export function PortfolioPage() {
         ) : null}
 
         {filteredItems.length === 0 ? (
-          <p className="mt-16 text-muted-foreground">No projects in this category yet.</p>
+          <p className="mt-16 text-muted-foreground">{t("empty")}</p>
         ) : null}
 
         <motion.div
@@ -296,11 +318,10 @@ export function PortfolioPage() {
         >
           <div>
             <p className="font-heading text-xl font-semibold tracking-tight md:text-2xl">
-              Ready to start your project?
+              {t("cta.heading")}
             </p>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-              Tell us what you&apos;re building — film, TikTok, or photography —
-              and we&apos;ll map out the next steps together.
+              {t("cta.description")}
             </p>
           </div>
           <ViewfinderLink
@@ -309,7 +330,7 @@ export function PortfolioPage() {
             className="inline-flex shrink-0"
             data-icon="inline-end"
           >
-            Book a call
+            {t("cta.bookCall")}
             <ArrowUpRight className="size-4" />
           </ViewfinderLink>
         </motion.div>

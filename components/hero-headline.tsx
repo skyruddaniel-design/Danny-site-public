@@ -1,14 +1,9 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
-
-const HIGHLIGHT_WORDS = [
-  "noticed.",
-  "remembered.",
-  "seen.",
-  "shared.",
-];
+import { useTranslations } from "next-intl";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const TYPING_MS = 42;
 const BACKSPACE_MS = 28;
@@ -25,19 +20,23 @@ function wait(ms: number, signal: AbortSignal) {
 }
 
 type TypewriterHighlightProps = {
-  words?: string[];
+  words: string[];
   active?: boolean;
   className?: string;
 };
 
 export function TypewriterHighlight({
-  words = HIGHLIGHT_WORDS,
+  words,
   active = true,
   className,
 }: TypewriterHighlightProps) {
   const prefersReducedMotion = useReducedMotion();
   const [display, setDisplay] = useState(words[0]);
   const wordIndexRef = useRef(0);
+  const longestWord = useMemo(
+    () => words.reduce((longest, word) => (word.length > longest.length ? word : longest), words[0]),
+    [words]
+  );
 
   useEffect(() => {
     if (!active || prefersReducedMotion) {
@@ -83,20 +82,25 @@ export function TypewriterHighlight({
   }, [active, prefersReducedMotion, words]);
 
   return (
-    <span className={className}>
-      <span aria-live="polite">{display}</span>
-      {active && !prefersReducedMotion && (
-        <motion.span
-          aria-hidden
-          className="ml-1 inline-block h-[0.75em] w-[3px] translate-y-px bg-primary align-baseline"
-          animate={{ opacity: [1, 0.2, 1] }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      )}
+    <span className={cn("inline-grid align-top [grid-template-areas:'stack']", className)}>
+      <span aria-hidden className="invisible [grid-area:stack]">
+        {longestWord}
+      </span>
+      <span className="[grid-area:stack]" aria-live="polite">
+        {display}
+        {active && !prefersReducedMotion ? (
+          <motion.span
+            aria-hidden
+            className="ml-1 inline-block h-[0.75em] w-[3px] translate-y-px bg-primary align-baseline"
+            animate={{ opacity: [1, 0.2, 1] }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ) : null}
+      </span>
     </span>
   );
 }
@@ -106,14 +110,23 @@ type HeroHeadlineProps = {
 };
 
 export function HeroHeadline({ active = true }: HeroHeadlineProps) {
+  const t = useTranslations("hero.headline");
+  const words = useMemo(
+    () => [
+      t("words.noticed"),
+      t("words.remembered"),
+      t("words.seen"),
+      t("words.shared"),
+    ],
+    [t]
+  );
+
   return (
-    <h1 className="text-6xl font-bold tracking-tight text-foreground md:text-7xl font-heading">
-      Content that gets brands{" "}
-      <br className="block md:hidden" />
-      <TypewriterHighlight
-        active={active}
-        className="text-primary"
-      />
+    <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-7xl">
+      <span className="block">{t("prefix")}</span>
+      <span className="mt-1 block text-primary">
+        <TypewriterHighlight words={words} active={active} />
+      </span>
     </h1>
   );
 }

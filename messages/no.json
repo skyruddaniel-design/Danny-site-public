@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "siteDescription": "Innholdsproduksjon — strategi, video, fotografi og sosiale medier."
+  },
+  "hero": {
+    "description": "Visuelt innhold for merkevarer som vil kommunisere tydelig, profesjonelt og med gjennomslag.",
+    "cta": {
+      "viewServices": "Se tjenester",
+      "bookCall": "Book en samtale"
+    },
+    "headline": {
+      "prefix": "Innhold som får merkevarer ",
+      "words": {
+        "noticed": "lagt merke til.",
+        "remembered": "husket.",
+        "seen": "sett.",
+        "shared": "delt."
+      }
+    },
+    "camera": {
+      "rec": "REC",
+      "stby": "STBY",
+      "resolution": "4K",
+      "fps": "25fps",
+      "timecodePlaceholder": "--:--:--:--",
+      "shutter": "1/50",
+      "aperture": "f/2.8"
+    }
+  },
+  "a11y": {
+    "video": {
+      "restart": "Start videoen på nytt",
+      "skipBack": "Hopp tilbake {seconds} sekunder",
+      "play": "Spill av video",
+      "pause": "Pause video",
+      "skipForward": "Hopp frem {seconds} sekunder",
+      "unmute": "Slå på lyd",
+      "mute": "Slå av lyd"
+    }
+  },
+  "header": {
+    "nav": {
+      "label": "Hovednavigasjon",
+      "services": "Tjenester",
+      "process": "Prosess",
+      "portfolio": "Portefølje"
+    },
+    "cta": {
+      "contact": "Kontakt oss"
+    },
+    "menu": {
+      "open": "Åpne meny",
+      "close": "Lukk meny"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} {siteName}. Alle rettigheter reservert.",
+    "nav": {
+      "label": "Bunntekst"
+    },
+    "privacyLink": "Personvernerklæring"
+  },
+  "services": {
+    "heading": "Det vi lager",
+    "intro": "Ett team fra brief til levering — film, fotografi, strategi og postproduksjon for merkevarer som må se like skarpe ut som de høres.",
+    "watermark": "Tjenester",
+    "card": {
+      "explore": "Utforsk"
+    },
+    "items": {
+      "video": {
+        "title": "Video",
+        "summary": "Historiedrevne filmer bygget for oppmerksomhet — fra første brief til ferdig eksport.",
+        "imageAlt": "Filmfotograf som filmer på location",
+        "items": {
+          "commercials": "Reklamefilm",
+          "interviews": "Intervjuer",
+          "reels": "Reels",
+          "eventFilms": "Eventfilm",
+          "campaignContent": "Kampanjeinnhold"
+        }
+      },
+      "photography": {
+        "title": "Fotografi",
+        "summary": "Konsekvent bildebruk som styrker hvordan merkevaren din ser ut overalt.",
+        "imageAlt": "Fotograf som justerer et kamera i studio",
+        "items": {
+          "productPhotography": "Produktfotografi",
+          "portraits": "Portretter",
+          "lifestyleImagery": "Livsstilsbilder",
+          "brandImageLibraries": "Merkevarebiblioteker"
+        }
+      },
+      "strategy": {
+        "title": "Strategi",
+        "summary": "Tydelig retning før kameraene ruller — slik at hvert asset har en jobb å gjøre.",
+        "imageAlt": "Kreativt team som planlegger en kampanje sammen",
+        "items": {
+          "creativeConcepts": "Kreative konsepter",
+          "scripting": "Manus",
+          "contentPlanning": "Innholdsplanlegging",
+          "platformOptimisation": "Plattformoptimalisering"
+        }
+      },
+      "postProduction": {
+        "title": "Postproduksjon",
+        "summary": "Polert finishing som får arbeidet til å føles gjennomtenkt, ikke satt sammen.",
+        "imageAlt": "Videoeditor som jobber ved en fargegraderingsstasjon",
+        "items": {
+          "editing": "Klipping",
+          "colourGrading": "Fargegradering",
+          "soundDesign": "Lyddesign",
+          "subtitles": "Undertekster",
+          "deliveryInEveryFormat": "Levering i alle formater"
+        }
+      }
+    }
+  },
+  "process": {
+    "heading": "Fra konsept til levering",
+    "intro": "En smidig produksjonsprosess med tydelige milepæler — slik at du alltid vet hva som skjer og når du får filene dine.",
+    "watermark": "Prosess",
+    "cta": {
+      "moreWork": "Mer av arbeidet vårt"
+    },
+    "steps": {
+      "label": "Steg · {number}",
+      "discovery": {
+        "title": "Kartlegging",
+        "description": "Vi definerer målgruppe, budskap, kanaler og produksjonskrav."
+      },
+      "production": {
+        "title": "Produksjon",
+        "description": "Vi planlegger opptak, locations, crew og innholdsplan."
+      },
+      "delivery": {
+        "title": "Levering",
+        "description": "Du mottar ferdige filer for nettsider, sosiale medier, annonsering og presentasjoner."
+      }
+    }
+  },
+  "contact": {
+    "heading": "La oss snakke om prosjektet ditt",
+    "intro": "Del noen detaljer, så tar vi kontakt med neste steg — vanligvis innen én virkedag.",
+    "watermark": "Kontakt",
+    "sidebar": {
+      "directLine": "Direkte linje",
+      "imageAlt": "Daniel Skyrud",
+      "emailNote": "Foretrekker du e-post? Send over en brief, tidslinje eller referanselenker, så tar vi det derfra.",
+      "responseTime": "Vanlig svartid er innen 24 timer på virkedager."
+    },
+    "form": {
+      "name": "Navn",
+      "email": "E-post",
+      "company": "Selskap",
+      "service": "Tjeneste",
+      "message": "Prosjektdetaljer",
+      "placeholders": {
+        "name": "Ditt navn",
+        "email": "deg@bedrift.no",
+        "company": "Valgfritt",
+        "service": "Hva trenger du?",
+        "message": "Fortell oss om prosjektet, tidslinjen og hvor innholdet skal brukes."
+      },
+      "serviceOptions": {
+        "video": "Video",
+        "photography": "Fotografi",
+        "strategy": "Strategi",
+        "postProduction": "Postproduksjon",
+        "notSure": "Usikker ennå"
+      },
+      "submit": "Send melding",
+      "sending": "Sender...",
+      "success": "Melding sendt — vi tar kontakt snart.",
+      "privacyBefore": "Ved å sende inn dette skjemaet samtykker du til at vi kan behandle opplysningene dine for å svare på henvendelsen. Les vår",
+      "privacyLink": "personvernerklæring"
+    },
+    "validation": {
+      "name": "Vennligst oppgi navnet ditt.",
+      "email": "Vennligst oppgi en gyldig e-postadresse.",
+      "service": "Vennligst velg en tjeneste.",
+      "message": "Vennligst del litt mer om prosjektet ditt."
+    },
+    "error": {
+      "generic": "Noe gikk galt. Vennligst prøv igjen."
+    }
+  },
+  "portfolio": {
+    "backToProcess": "Tilbake til prosess",
+    "heading": "Utvalgt arbeid",
+    "intro": "Kortfilm, TikTok-klipp og fotografi — den typen arbeid vi leverer fra første brief til ferdig eksport.",
+    "watermark": "Portefølje",
+    "filters": {
+      "label": "Filtrer portefølje",
+      "all": "Alt arbeid",
+      "shortFilm": "Kortfilm",
+      "tiktok": "TikTok-klipp",
+      "photography": "Fotografi"
+    },
+    "sections": {
+      "shortFilms": {
+        "title": "Kortfilm",
+        "description": "Filmiske klipp og merkevarefilmer — hold over for forhåndsvisning, bygget for nett og presentasjoner."
+      },
+      "tiktok": {
+        "title": "TikTok-klipp",
+        "description": "Raske, vertikale klipp tilpasset oppmerksomhet — bla gjennom nylige sosiale klipp."
+      },
+      "photography": {
+        "title": "Fotografi",
+        "description": "Stillbilder og bildebiblioteker for merkevarer som trenger konsistens på tvers av alle kanaler."
+      }
+    },
+    "empty": "Ingen prosjekter i denne kategorien ennå.",
+    "cta": {
+      "heading": "Klar til å starte prosjektet ditt?",
+      "description": "Fortell oss hva du bygger — film, TikTok eller fotografi — så kartlegger vi neste steg sammen.",
+      "bookCall": "Book en samtale"
+    },
+    "items": {
+      "ai-tar-over-verden": {
+        "title": "Ai tar over verden",
+        "category": "Kortfilm",
+        "alt": "Ai tar over verden"
+      },
+      "mann-pa-bussen": {
+        "title": "Mann på bussen",
+        "category": "TikTok-klipp",
+        "alt": "Mann på bussen"
+      },
+      "danny-cutie": {
+        "title": "Danny cutie",
+        "category": "Fotografi",
+        "alt": "Danny cutie"
+      }
+    },
+    "watch": {
+      "tikTok": "Se på TikTok",
+      "youTube": "Se på YouTube",
+      "vimeo": "Se på Vimeo",
+      "instagram": "Se på Instagram",
+      "theFilm": "Se filmen",
+      "fullMovieTikTok": "Hele filmen på TikTok",
+      "fullMovieYouTube": "Hele filmen på YouTube",
+      "fullMovieVimeo": "Hele filmen på Vimeo",
+      "fullMovieInstagram": "Hele filmen på Instagram",
+      "fullFilm": "Se hele filmen"
+    },
+    "actions": {
+      "viewPreview": "Se forhåndsvisning"
+    },
+    "carousel": {
+      "previous": "Forrige prosjekt",
+      "next": "Neste prosjekt",
+      "slidesLabel": "Porteføljelysbilder",
+      "showItem": "Vis {title}"
+    },
+    "lightbox": {
+      "previewLabel": "Forhåndsvisning · {category}",
+      "ariaPreview": "Forhåndsvisning {title}",
+      "close": "Lukk",
+      "closePreview": "Lukk forhåndsvisning"
+    }
+  },
+  "privacy": {
+    "metadata": {
+      "title": "Personvernerklæring | {siteName}",
+      "description": "Hvordan {siteName} samler inn og bruker personopplysninger."
+    },
+    "eyebrow": "Juridisk",
+    "heading": "Personvernerklæring",
+    "lastUpdated": "Sist oppdatert: {date}",
+    "backToHome": "Tilbake til forsiden",
+    "sections": {
+      "whoWeAre": {
+        "title": "1. Hvem vi er",
+        "intro": "{dataController} driver nettstedet {siteName} og er behandlingsansvarlig for personopplysningene beskrevet i denne erklæringen.",
+        "contactIntro": "For spørsmål eller henvendelser om personvern, kontakt oss på",
+        "contactOutro": "."
+      },
+      "whatWeCollect": {
+        "title": "2. Hvilke personopplysninger vi samler inn",
+        "intro": "Vi samler kun inn personopplysninger du velger å oppgi via kontaktskjemaet vårt. Dette kan omfatte:",
+        "items": {
+          "name": "Navn",
+          "email": "E-postadresse",
+          "company": "Selskapsnavn (valgfritt)",
+          "service": "Tjeneste du er interessert i",
+          "details": "Prosjektdetaljer og annen informasjon du velger å dele"
+        },
+        "noTracking": "Vi bruker ikke analyseverktøy, annonsesporing eller ikke-nødvendige informasjonskapsler på dette nettstedet."
+      },
+      "howWeCollect": {
+        "title": "3. Hvordan vi samler inn data",
+        "form": "Vi samler inn personopplysninger når du sender inn kontaktskjemaet på nettstedet vårt. Informasjonen behandles slik at vi kan motta og svare på henvendelsen din.",
+        "hosting": "Som de fleste nettsteder kan hosting-leverandøren vår automatisk behandle begrenset teknisk informasjon som er nødvendig for å levere nettstedet sikkert, for eksempel IP-adresse, nettlesertype og forespørselslogger. Vi bruker ikke denne informasjonen til å identifisere besøkende eller til markedsføring."
+      },
+      "whyWeUse": {
+        "title": "4. Hvorfor vi bruker opplysningene dine og rettslig grunnlag",
+        "intro": "Vi bruker personopplysningene dine til å:",
+        "purposes": {
+          "respond": "Svare på henvendelsen din",
+          "followUp": "Følge opp et potensielt prosjekt eller samarbeid",
+          "records": "Opprettholde en oversikt over kommunikasjonen vår der det er hensiktsmessig"
+        },
+        "gdprIntro": "I henhold til personvernforordningen (GDPR) behandler vi personopplysningene dine på følgende rettslige grunnlag:",
+        "article6b": "Artikkel 6(1)(b) — for å ta skritt på din forespørsel før inngåelse av avtale, for eksempel å svare på prosjektforespørsler.",
+        "article6f": "Artikkel 6(1)(f) — vår berettigede interesse i å svare på henvendelser og administrere forretningskommunikasjon."
+      },
+      "retention": {
+        "title": "5. Hvor lenge vi oppbevarer opplysningene dine",
+        "main": "Vi oppbevarer innsendelser fra kontaktskjemaet bare så lenge det er nødvendig for å svare på henvendelsen din og håndtere eventuell oppfølging. Hvis et forretningsforhold utvikler seg, kan vi beholde relevant korrespondanse av administrative, regnskapsmessige eller juridiske årsaker.",
+        "deletion": "Når personopplysninger ikke lenger er nødvendige, slettes eller anonymiseres de."
+      },
+      "sharing": {
+        "title": "6. Hvem vi deler data med",
+        "intro": "Vi selger ikke personopplysningene dine. Vi kan dele dem bare med:",
+        "providers": "Tjenesteleverandører som hjelper oss med å drifte nettstedet eller levere e-post (for eksempel hosting eller e-posttjenester), under databehandleravtaler der det kreves.",
+        "authorities": "Myndigheter eller faglige rådgivere der vi er juridisk forpliktet til det.",
+        "transfers": "Hvis personopplysninger overføres utenfor Storbritannia eller EØS, sørger vi for at passende sikkerhetstiltak er på plass, for eksempel standard kontraktsklausuler eller en tilstrekkelighetsbeslutning der det er aktuelt."
+      },
+      "rights": {
+        "title": "7. Dine rettigheter",
+        "intro": "Hvis du befinner deg i Storbritannia eller EØS, har du rett til å:",
+        "items": {
+          "access": "Få innsyn i personopplysningene vi har om deg",
+          "correction": "Be om retting av uriktige personopplysninger",
+          "deletion": "Be om sletting av personopplysningene dine i visse tilfeller",
+          "restrict": "Begrense eller protestere mot visse former for behandling",
+          "portability": "Motta personopplysningene dine i et portabelt format der det er aktuelt"
+        },
+        "exerciseIntro": "For å utøve noen av disse rettighetene, kontakt oss på",
+        "exerciseOutro": ". Vi svarer innen én måned, som kreves av gjeldende lov.",
+        "complaintIntro": "Du har også rett til å klage til din lokale tilsynsmyndighet for personvern. I Norge er dette",
+        "complaintOutro": "."
+      },
+      "security": {
+        "title": "8. Sikkerhet",
+        "body": "Vi iverksetter passende tekniske og organisatoriske tiltak for å beskytte personopplysninger mot uautorisert tilgang, tap, misbruk eller utlevering. Selv om ingen metode for overføring over internett er helt sikker, jobber vi for å beskytte informasjonen du oppgir."
+      },
+      "changes": {
+        "title": "9. Endringer i denne erklæringen",
+        "body": "Vi kan oppdatere denne personvernerklæringen fra tid til annen. Eventuelle endringer publiseres på denne siden, og datoen for «Sist oppdatert» oppdateres tilsvarende."
+      }
+    }
+  }
+}

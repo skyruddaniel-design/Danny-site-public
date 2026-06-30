@@ -7,13 +7,14 @@ import {
   getPortfolioPreviewSrc,
   hasPortfolioWatchLink,
   isPortfolioVideo,
-  type PortfolioItem,
+  type LocalizedPortfolioItem,
 } from "@/lib/portfolio";
 import { Play } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type PortfolioVideoActionsProps = {
-  item: PortfolioItem;
-  onOpenPreview?: (item: PortfolioItem) => void;
+  item: LocalizedPortfolioItem;
+  onOpenPreview?: (item: LocalizedPortfolioItem) => void;
   className?: string;
   align?: "start" | "end" | "between";
 };
@@ -24,6 +25,7 @@ export function PortfolioVideoActions({
   className,
   align = "end",
 }: PortfolioVideoActionsProps) {
+  const t = useTranslations("portfolio");
   const previewSrc = getPortfolioPreviewSrc(item);
   const hasPreview = Boolean(previewSrc);
   const hasWatchLink = hasPortfolioWatchLink(item);
@@ -59,7 +61,7 @@ export function PortfolioVideoActions({
           }}
         >
           <Play className="size-3.5 fill-current" />
-          View preview
+          {t("actions.viewPreview")}
         </Button>
       ) : null}
       {hasWatchLink ? <PortfolioWatchLink item={item} /> : null}

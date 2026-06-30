@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "siteDescription": "Content production — strategy, video, photography and social media."
+  },
+  "hero": {
+    "description": "Visual content for brands that want to communicate clearly, professionally, and with impact.",
+    "cta": {
+      "viewServices": "View services",
+      "bookCall": "Book a call"
+    },
+    "headline": {
+      "prefix": "Content that gets brands ",
+      "words": {
+        "noticed": "noticed.",
+        "remembered": "remembered.",
+        "seen": "seen.",
+        "shared": "shared."
+      }
+    },
+    "camera": {
+      "rec": "REC",
+      "stby": "STBY",
+      "resolution": "4K",
+      "fps": "25fps",
+      "timecodePlaceholder": "--:--:--:--",
+      "shutter": "1/50",
+      "aperture": "f/2.8"
+    }
+  },
+  "a11y": {
+    "video": {
+      "restart": "Restart video",
+      "skipBack": "Skip back {seconds} seconds",
+      "play": "Play video",
+      "pause": "Pause video",
+      "skipForward": "Skip forward {seconds} seconds",
+      "unmute": "Unmute video",
+      "mute": "Mute video"
+    }
+  },
+  "header": {
+    "nav": {
+      "label": "Main navigation",
+      "services": "Services",
+      "process": "Process",
+      "portfolio": "Portfolio"
+    },
+    "cta": {
+      "contact": "Contact now"
+    },
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} {siteName}. All rights reserved.",
+    "nav": {
+      "label": "Footer"
+    },
+    "privacyLink": "Privacy policy"
+  },
+  "services": {
+    "heading": "What we make",
+    "intro": "One team from brief to delivery — film, photography, strategy, and post-production for brands that need to look as sharp as they sound.",
+    "watermark": "Services",
+    "card": {
+      "explore": "Explore"
+    },
+    "items": {
+      "video": {
+        "title": "Video",
+        "summary": "Story-led films built for attention — from first brief to final export.",
+        "imageAlt": "Cinematographer filming on location",
+        "items": {
+          "commercials": "Commercials",
+          "interviews": "Interviews",
+          "reels": "Reels",
+          "eventFilms": "Event films",
+          "campaignContent": "Campaign content"
+        }
+      },
+      "photography": {
+        "title": "Photography",
+        "summary": "Consistent imagery that strengthens how your brand looks everywhere.",
+        "imageAlt": "Photographer adjusting a camera in studio",
+        "items": {
+          "productPhotography": "Product photography",
+          "portraits": "Portraits",
+          "lifestyleImagery": "Lifestyle imagery",
+          "brandImageLibraries": "Brand image libraries"
+        }
+      },
+      "strategy": {
+        "title": "Strategy",
+        "summary": "Clear direction before the cameras roll — so every asset has a job to do.",
+        "imageAlt": "Creative team planning a campaign together",
+        "items": {
+          "creativeConcepts": "Creative concepts",
+          "scripting": "Scripting",
+          "contentPlanning": "Content planning",
+          "platformOptimisation": "Platform optimisation"
+        }
+      },
+      "postProduction": {
+        "title": "Post Production",
+        "summary": "Polished finishing that makes the work feel intentional, not assembled.",
+        "imageAlt": "Video editor working at a colour grading workstation",
+        "items": {
+          "editing": "Editing",
+          "colourGrading": "Colour grading",
+          "soundDesign": "Sound design",
+          "subtitles": "Subtitles",
+          "deliveryInEveryFormat": "Delivery in every format"
+        }
+      }
+    }
+  },
+  "process": {
+    "heading": "From concept to delivery",
+    "intro": "A smooth production process with clear milestones — so you always know what's happening and when your assets land.",
+    "watermark": "Process",
+    "cta": {
+      "moreWork": "More of our work"
+    },
+    "steps": {
+      "label": "Step · {number}",
+      "discovery": {
+        "title": "Discovery",
+        "description": "We define your audience, message, channels, and production requirements."
+      },
+      "production": {
+        "title": "Production",
+        "description": "We plan the shoot, locations, crew, and content schedule."
+      },
+      "delivery": {
+        "title": "Delivery",
+        "description": "You receive ready-to-use files for websites, social media, advertising, and presentations."
+      }
+    }
+  },
+  "contact": {
+    "heading": "Let's talk about your project",
+    "intro": "Share a few details and we'll get back to you with next steps — usually within one business day.",
+    "watermark": "Contact",
+    "sidebar": {
+      "directLine": "Direct line",
+      "imageAlt": "Daniel Skyrud",
+      "emailNote": "Prefer email? Send over a brief, timeline, or reference links and we'll pick up the conversation from there.",
+      "responseTime": "Typical response time is within 24 hours on business days."
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "service": "Service",
+      "message": "Project details",
+      "placeholders": {
+        "name": "Your name",
+        "email": "you@company.com",
+        "company": "Optional",
+        "service": "What do you need?",
+        "message": "Tell us about the project, timeline, and where the content will be used."
+      },
+      "serviceOptions": {
+        "video": "Video",
+        "photography": "Photography",
+        "strategy": "Strategy",
+        "postProduction": "Post Production",
+        "notSure": "Not sure yet"
+      },
+      "submit": "Send message",
+      "sending": "Sending...",
+      "success": "Message sent — we'll be in touch soon.",
+      "privacyBefore": "By submitting this form, you agree that we may process your details to respond to your inquiry. Read our",
+      "privacyLink": "privacy policy"
+    },
+    "validation": {
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email address.",
+      "service": "Please select a service.",
+      "message": "Please share a bit more about your project."
+    },
+    "error": {
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "portfolio": {
+    "backToProcess": "Back to process",
+    "heading": "Selected work",
+    "intro": "Short films, TikTok edits, and photography — the kind of work we deliver from first brief to final export.",
+    "watermark": "Portfolio",
+    "filters": {
+      "label": "Filter portfolio",
+      "all": "All work",
+      "shortFilm": "Short films",
+      "tiktok": "TikTok edits",
+      "photography": "Photography"
+    },
+    "sections": {
+      "shortFilms": {
+        "title": "Short films",
+        "description": "Cinematic edits and brand films — hover to preview, built for web and presentations."
+      },
+      "tiktok": {
+        "title": "TikTok edits",
+        "description": "Fast, vertical cuts tuned for retention — scroll through recent social edits."
+      },
+      "photography": {
+        "title": "Photography",
+        "description": "Stills and image libraries for brands that need consistency across every channel."
+      }
+    },
+    "empty": "No projects in this category yet.",
+    "cta": {
+      "heading": "Ready to start your project?",
+      "description": "Tell us what you're building — film, TikTok, or photography — and we'll map out the next steps together.",
+      "bookCall": "Book a call"
+    },
+    "items": {
+      "ai-tar-over-verden": {
+        "title": "AI takes over the world",
+        "category": "Short film",
+        "alt": "AI takes over the world"
+      },
+      "mann-pa-bussen": {
+        "title": "Man on the bus",
+        "category": "TikTok edit",
+        "alt": "Man on the bus"
+      },
+      "danny-cutie": {
+        "title": "Danny cutie",
+        "category": "Photography",
+        "alt": "Danny cutie"
+      }
+    },
+    "watch": {
+      "tikTok": "Watch on TikTok",
+      "youTube": "Watch on YouTube",
+      "vimeo": "Watch on Vimeo",
+      "instagram": "Watch on Instagram",
+      "theFilm": "Watch the film",
+      "fullMovieTikTok": "Full movie on TikTok",
+      "fullMovieYouTube": "Full movie on YouTube",
+      "fullMovieVimeo": "Full movie on Vimeo",
+      "fullMovieInstagram": "Full movie on Instagram",
+      "fullFilm": "Watch full film"
+    },
+    "actions": {
+      "viewPreview": "View preview"
+    },
+    "carousel": {
+      "previous": "Previous project",
+      "next": "Next project",
+      "slidesLabel": "Portfolio slides",
+      "showItem": "Show {title}"
+    },
+    "lightbox": {
+      "previewLabel": "Preview · {category}",
+      "ariaPreview": "Preview {title}",
+      "close": "Close",
+      "closePreview": "Close preview"
+    }
+  },
+  "privacy": {
+    "metadata": {
+      "title": "Privacy policy | {siteName}",
+      "description": "How {siteName} collects and uses personal data."
+    },
+    "eyebrow": "Legal",
+    "heading": "Privacy policy",
+    "lastUpdated": "Last updated: {date}",
+    "backToHome": "Back to home",
+    "sections": {
+      "whoWeAre": {
+        "title": "1. Who we are",
+        "intro": "{dataController} operates the {siteName} website and is the data controller for the personal data described in this policy.",
+        "contactIntro": "For privacy-related questions or requests, contact us at",
+        "contactOutro": "."
+      },
+      "whatWeCollect": {
+        "title": "2. What personal data we collect",
+        "intro": "We only collect personal data that you choose to provide through our contact form. This may include:",
+        "items": {
+          "name": "Name",
+          "email": "Email address",
+          "company": "Company name (optional)",
+          "service": "Service you are interested in",
+          "details": "Project details and any other information you choose to share"
+        },
+        "noTracking": "We do not use analytics, advertising trackers, or non-essential cookies on this website."
+      },
+      "howWeCollect": {
+        "title": "3. How we collect data",
+        "form": "We collect personal data when you submit the contact form on our website. The information is processed so we can receive and respond to your inquiry.",
+        "hosting": "Like most websites, our hosting provider may automatically process limited technical information required to deliver the website securely, such as your IP address, browser type, and request logs. We do not use this information to identify visitors or for marketing."
+      },
+      "whyWeUse": {
+        "title": "4. Why we use your data and legal basis",
+        "intro": "We use your personal data to:",
+        "purposes": {
+          "respond": "Respond to your inquiry",
+          "followUp": "Follow up regarding a potential project or collaboration",
+          "records": "Maintain a record of our communication where appropriate"
+        },
+        "gdprIntro": "Under the UK/EU General Data Protection Regulation (GDPR), we process your personal data on the following legal bases:",
+        "article6b": "Article 6(1)(b) — to take steps at your request before entering into a contract, such as responding to project enquiries.",
+        "article6f": "Article 6(1)(f) — our legitimate interest in responding to enquiries and managing business communications."
+      },
+      "retention": {
+        "title": "5. How long we keep your data",
+        "main": "We keep contact form submissions only for as long as necessary to respond to your inquiry and manage any follow-up. If a business relationship develops, we may retain relevant correspondence for administrative, accounting, or legal purposes.",
+        "deletion": "When personal data is no longer needed, it is deleted or anonymised."
+      },
+      "sharing": {
+        "title": "6. Who we share data with",
+        "intro": "We do not sell your personal data. We may share it only with:",
+        "providers": "Service providers that help us operate the website or deliver email (such as hosting or email services), under data processing agreements where required.",
+        "authorities": "Authorities or professional advisers where we are legally required to do so.",
+        "transfers": "If personal data is transferred outside the UK or EEA, we ensure appropriate safeguards are in place, such as Standard Contractual Clauses or an adequacy decision where applicable."
+      },
+      "rights": {
+        "title": "7. Your rights",
+        "intro": "If you are in the UK or EEA, you have the right to:",
+        "items": {
+          "access": "Access the personal data we hold about you",
+          "correction": "Request correction of inaccurate personal data",
+          "deletion": "Request deletion of your personal data in certain circumstances",
+          "restrict": "Restrict or object to certain processing",
+          "portability": "Receive your personal data in a portable format where applicable"
+        },
+        "exerciseIntro": "To exercise any of these rights, contact us at",
+        "exerciseOutro": ". We will respond within one month, as required by applicable law.",
+        "complaintIntro": "You also have the right to lodge a complaint with your local data protection authority. In Norway, this is",
+        "complaintOutro": "."
+      },
+      "security": {
+        "title": "8. Security",
+        "body": "We take appropriate technical and organisational measures to protect personal data against unauthorised access, loss, misuse, or disclosure. While no method of transmission over the internet is completely secure, we work to protect the information you provide."
+      },
+      "changes": {
+        "title": "9. Changes to this policy",
+        "body": "We may update this privacy policy from time to time. Any changes will be published on this page, and the \"Last updated\" date will be revised accordingly."
+      }
+    }
+  }
+}

@@ -7,18 +7,19 @@ import {
   getPortfolioFullMovieLabel,
   getPortfolioPreviewSrc,
   hasPortfolioWatchLink,
-  type PortfolioItem,
+  type LocalizedPortfolioItem,
 } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 type PortfolioPreviewLightboxProps = {
-  item: PortfolioItem | null;
+  item: LocalizedPortfolioItem | null;
   onClose: () => void;
 };
 
@@ -26,6 +27,7 @@ export function PortfolioPreviewLightbox({
   item,
   onClose,
 }: PortfolioPreviewLightboxProps) {
+  const t = useTranslations("portfolio");
   const prefersReducedMotion = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -87,7 +89,7 @@ export function PortfolioPreviewLightbox({
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
           role="dialog"
           aria-modal="true"
-          aria-label={`Preview ${item.title}`}
+          aria-label={t("lightbox.ariaPreview", { title: item.title })}
           initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={prefersReducedMotion ? undefined : { opacity: 0 }}
@@ -95,7 +97,7 @@ export function PortfolioPreviewLightbox({
         >
           <button
             type="button"
-            aria-label="Close preview"
+            aria-label={t("lightbox.closePreview")}
             className="absolute inset-0 bg-black/88 backdrop-blur-sm"
             onClick={onClose}
           />
@@ -114,7 +116,7 @@ export function PortfolioPreviewLightbox({
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0 text-white">
                 <p className="font-mono text-[10px] tracking-[0.22em] text-white/65 uppercase md:text-[11px]">
-                  Preview · {item.category}
+                  {t("lightbox.previewLabel", { category: item.category })}
                 </p>
                 <h2 className="mt-1 font-heading text-xl font-semibold tracking-tight md:text-2xl">
                   {item.title}
@@ -124,7 +126,7 @@ export function PortfolioPreviewLightbox({
                 ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
-                aria-label="Close"
+                aria-label={t("lightbox.close")}
                 className="flex size-10 shrink-0 items-center justify-center border border-white/20 bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60"
               >
                 <X className="size-5" />
@@ -165,7 +167,7 @@ export function PortfolioPreviewLightbox({
               {showWatchLink ? (
                 <PortfolioWatchLink
                   item={item}
-                  label={getPortfolioFullMovieLabel(item)}
+                  label={getPortfolioFullMovieLabel(item, t)}
                   className="w-full sm:w-auto"
                 />
               ) : null}

@@ -7,6 +7,7 @@ import {
   type Transition,
   type Variants,
 } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 export type CameraIntroPhase = "standby" | "recording" | "exiting" | "done";
@@ -83,6 +84,7 @@ function useTimecode(active: boolean) {
 }
 
 export function CameraIntro({ onPhaseChange, onComplete }: CameraIntroProps) {
+  const t = useTranslations("hero.camera");
   const prefersReducedMotion = useReducedMotion();
   const [phase, setPhase] = useState<CameraIntroPhase>("standby");
   const completedRef = useRef(false);
@@ -256,30 +258,30 @@ export function CameraIntro({ onPhaseChange, onComplete }: CameraIntroProps) {
                 }}
               />
               <span className="font-mono text-xs font-semibold tracking-[0.2em] text-rec">
-                REC
+                {t("rec")}
               </span>
             </>
           ) : (
             <span className="font-mono text-xs font-medium tracking-[0.2em] text-white/80">
-              STBY
+              {t("stby")}
             </span>
           )}
         </div>
 
         <div className="absolute right-4 top-4 flex items-center gap-3 font-mono text-[11px] tracking-widest text-white/80 sm:right-5 sm:top-5">
-          <span>4K</span>
+          <span>{t("resolution")}</span>
           <span className="text-white/40">|</span>
-          <span>25fps</span>
+          <span>{t("fps")}</span>
         </div>
 
         <div className="absolute bottom-4 left-4 font-mono text-[11px] tracking-widest text-white/90 sm:bottom-5 sm:left-5">
-          {isRecording ? timecode : "--:--:--:--"}
+          {isRecording ? timecode : t("timecodePlaceholder")}
         </div>
 
         <div className="absolute bottom-4 right-4 font-mono text-[11px] tracking-widest text-white/75 sm:bottom-5 sm:right-5">
-          <span>1/50</span>
+          <span>{t("shutter")}</span>
           <span className="mx-2 text-white/35">·</span>
-          <span>f/2.8</span>
+          <span>{t("aperture")}</span>
         </div>
       </motion.div>
 

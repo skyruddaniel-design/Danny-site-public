@@ -6,7 +6,7 @@ import {
   getPortfolioPreviewSrc,
   hasPortfolioWatchLink,
   isPortfolioVideo,
-  type PortfolioItem,
+  type LocalizedPortfolioItem,
 } from "@/lib/portfolio";
 import {
   animate,
@@ -17,16 +17,17 @@ import {
   type PanInfo,
 } from "motion/react";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const slideEase = [0.22, 1, 0.36, 1] as const;
 
 type PortfolioCarouselProps = {
-  items: PortfolioItem[];
+  items: LocalizedPortfolioItem[];
   className?: string;
   autoplayMs?: number;
-  onOpenPreview?: (item: PortfolioItem) => void;
+  onOpenPreview?: (item: LocalizedPortfolioItem) => void;
 };
 
 export function PortfolioCarousel({
@@ -35,6 +36,7 @@ export function PortfolioCarousel({
   autoplayMs = 5500,
   onOpenPreview,
 }: PortfolioCarouselProps) {
+  const t = useTranslations("portfolio");
   const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
@@ -204,7 +206,7 @@ export function PortfolioCarousel({
           <>
             <button
               type="button"
-              aria-label="Previous project"
+              aria-label={t("carousel.previous")}
               onClick={goPrev}
               className="absolute top-1/2 left-3 z-10 flex size-9 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:left-4 md:size-10"
             >
@@ -212,7 +214,7 @@ export function PortfolioCarousel({
             </button>
             <button
               type="button"
-              aria-label="Next project"
+              aria-label={t("carousel.next")}
               onClick={goNext}
               className="absolute top-1/2 right-3 z-10 flex size-9 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/55 md:right-4 md:size-10"
             >
@@ -236,7 +238,7 @@ export function PortfolioCarousel({
         <div
           className="mt-4 flex gap-2"
           role="tablist"
-          aria-label="Portfolio slides"
+          aria-label={t("carousel.slidesLabel")}
         >
           {items.map((item, index) => {
             const isActive = index === activeIndex;
@@ -247,7 +249,7 @@ export function PortfolioCarousel({
                 type="button"
                 role="tab"
                 aria-selected={isActive}
-                aria-label={`Show ${item.title}`}
+                aria-label={t("carousel.showItem", { title: item.title })}
                 onClick={() => goTo(index)}
                 className="relative h-1 flex-1 overflow-hidden bg-border"
               >

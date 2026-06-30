@@ -6,7 +6,7 @@ import {
   getPortfolioPreviewSrc,
   hasPortfolioWatchLink,
   isPortfolioVideo,
-  type PortfolioItem,
+  type LocalizedPortfolioItem,
 } from "@/lib/portfolio";
 import { useReducedMotion } from "motion/react";
 import { Play } from "lucide-react";
@@ -14,10 +14,10 @@ import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
 
 type PortfolioMediaCardProps = {
-  item: PortfolioItem;
+  item: LocalizedPortfolioItem;
   className?: string;
   priority?: boolean;
-  onOpenPreview?: (item: PortfolioItem) => void;
+  onOpenPreview?: (item: LocalizedPortfolioItem) => void;
 };
 
 export function PortfolioMediaCard({

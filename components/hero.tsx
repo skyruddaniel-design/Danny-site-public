@@ -10,6 +10,7 @@ import { ScrollPageButton } from "@/components/scroll-page-button";
 import { VideoPlayerControls } from "@/components/video-player-controls";
 import { useVideoPlayer } from "@/hooks/use-video-player";
 import { motion, useReducedMotion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import { Separator } from "@/components/ui/separator";
@@ -20,6 +21,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const zoomEase = [0.83, 0, 0.17, 1] as const;
 
 export function Hero() {
+  const t = useTranslations("hero");
   const prefersReducedMotion = useReducedMotion();
   const { setIntroComplete } = useHeroIntro();
   const [introPhase, setIntroPhase] = useState<CameraIntroPhase>("standby");
@@ -143,29 +145,34 @@ export function Hero() {
 
             {/* Hero description */}
             <motion.p
-              className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
+              className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:mt-5 md:text-xl"
               variants={fadeUp}
             >
-              Visual content for brands that want to communicate clearly,
-              professionally, and with impact.
+              {t("description")}
             </motion.p>
 
             {/* Hero buttons */}
             <motion.div
-              className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+              className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center"
               variants={fadeUp}
             >
-              <ScrollPageButton variant="default" size="xl" targetId="services">
-                View services
+              <ScrollPageButton
+                variant="default"
+                size="lg"
+                className="w-full sm:w-auto md:h-14 md:px-12"
+                targetId="services"
+              >
+                {t("cta.viewServices")}
               </ScrollPageButton>
               <ScrollPageButton
                 variant="outline"
-                size="xl"
+                size="lg"
+                className="w-full sm:w-auto md:h-14 md:px-12"
                 targetId="contact"
                 data-icon="inline-end"
               >
-                Book a call
-                <ArrowUpRight className="size-5" />
+                {t("cta.bookCall")}
+                <ArrowUpRight className="size-4 md:size-5" />
               </ScrollPageButton>
 
             </motion.div>

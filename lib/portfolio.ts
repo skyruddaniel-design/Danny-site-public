@@ -4,62 +4,70 @@ export type PortfolioFilter = "all" | PortfolioType;
 
 export type PortfolioItem = {
   id: string;
-  title: string;
-  category: string;
   type: PortfolioType;
-  /** Poster image for video, or the photo itself */
   src: string;
-  /** Short preview clip hosted on this site */
   previewSrc?: string;
-  /** Link to the full film on TikTok, YouTube, Vimeo, etc. */
   watchUrl?: string;
-  alt: string;
   ratio: number;
 };
 
-export const PORTFOLIO_FILTERS: { value: PortfolioFilter; label: string }[] = [
-  { value: "all", label: "All work" },
-  { value: "short-film", label: "Short films" },
-  { value: "tiktok", label: "TikTok edits" },
-  { value: "photography", label: "Photography" },
-];
+export type LocalizedPortfolioItem = PortfolioItem & {
+  title: string;
+  category: string;
+  alt: string;
+};
+
+type TranslateFn = (
+  key: string,
+  values?: Record<string, string | number>
+) => string;
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     id: "ai-tar-over-verden",
-    title: "Ai tar over verden",
-    category: "Short film",
     type: "short-film",
     src: "/images/ai-tar-over-verden-thumbnail.jpeg",
     previewSrc: "/videos/ai-tar-over-verden-film.mp4",
     watchUrl:
       "https://www.tiktok.com/@toppetasjen.films/video/7561120711612321046",
-    alt: "Ai tar over verden",
     ratio: 16 / 9,
   },
   {
     id: "mann-pa-bussen",
-    title: "Mann på bussen",
-    category: "TikTok edit",
     type: "tiktok",
     src: "/images/mann-pa-bussen-thumbnail.png",
     previewSrc: "/videos/mann-pa-bussen-film.mp4",
-    alt: "Mann på bussen",
     ratio: 4 / 5,
   },
   {
     id: "danny-cutie",
-    title: "Danny cutie",
-    category: "Photography",
     type: "photography",
     src: "/images/danny-cutie.jpg",
-    alt: "Danny cutie",
     ratio: 4 / 5,
   },
 ];
 
-export function filterPortfolioItems(
+export function localizePortfolioItem(
+  item: PortfolioItem,
+  t: TranslateFn
+): LocalizedPortfolioItem {
+  return {
+    ...item,
+    title: t(`items.${item.id}.title`),
+    category: t(`items.${item.id}.category`),
+    alt: t(`items.${item.id}.alt`),
+  };
+}
+
+export function localizePortfolioItems(
   items: PortfolioItem[],
+  t: TranslateFn
+) {
+  return items.map((item) => localizePortfolioItem(item, t));
+}
+
+export function filterPortfolioItems(
+  items: LocalizedPortfolioItem[],
   filter: PortfolioFilter
 ) {
   if (filter === "all") {
@@ -69,12 +77,18 @@ export function filterPortfolioItems(
   return items.filter((item) => item.type === filter);
 }
 
-export function groupPortfolioItems(items: PortfolioItem[]) {
+export function groupPortfolioItems(items: LocalizedPortfolioItem[]) {
   return {
     shortFilms: items.filter((item) => item.type === "short-film"),
     tiktok: items.filter((item) => item.type === "tiktok"),
     photography: items.filter((item) => item.type === "photography"),
   };
+}
+
+export function getPortfolioPreview(items: LocalizedPortfolioItem[]) {
+  return items
+    .filter((item) => item.type === "short-film" || item.type === "photography")
+    .slice(0, 5);
 }
 
 export const PORTFOLIO_PREVIEW = PORTFOLIO_ITEMS.filter(
@@ -94,42 +108,42 @@ export function hasPortfolioWatchLink(item: PortfolioItem) {
   return Boolean(item.watchUrl);
 }
 
-export function getPortfolioWatchLabel(item: PortfolioItem) {
+export function getPortfolioWatchLabel(item: PortfolioItem, t: TranslateFn) {
   if (item.watchUrl) {
     try {
       const host = new URL(item.watchUrl).hostname.replace(/^www\./, "");
 
-      if (host.includes("tiktok.com")) return "Watch on TikTok";
+      if (host.includes("tiktok.com")) return t("watch.tikTok");
       if (host.includes("youtube.com") || host === "youtu.be") {
-        return "Watch on YouTube";
+        return t("watch.youTube");
       }
-      if (host.includes("vimeo.com")) return "Watch on Vimeo";
-      if (host.includes("instagram.com")) return "Watch on Instagram";
+      if (host.includes("vimeo.com")) return t("watch.vimeo");
+      if (host.includes("instagram.com")) return t("watch.instagram");
     } catch {
       // Fall through to generic labels below.
     }
   }
 
-  if (item.type === "tiktok") return "Watch on TikTok";
-  return "Watch the film";
+  if (item.type === "tiktok") return t("watch.tikTok");
+  return t("watch.theFilm");
 }
 
-export function getPortfolioFullMovieLabel(item: PortfolioItem) {
+export function getPortfolioFullMovieLabel(item: PortfolioItem, t: TranslateFn) {
   if (item.watchUrl) {
     try {
       const host = new URL(item.watchUrl).hostname.replace(/^www\./, "");
 
-      if (host.includes("tiktok.com")) return "Full movie on TikTok";
+      if (host.includes("tiktok.com")) return t("watch.fullMovieTikTok");
       if (host.includes("youtube.com") || host === "youtu.be") {
-        return "Full movie on YouTube";
+        return t("watch.fullMovieYouTube");
       }
-      if (host.includes("vimeo.com")) return "Full movie on Vimeo";
-      if (host.includes("instagram.com")) return "Full movie on Instagram";
+      if (host.includes("vimeo.com")) return t("watch.fullMovieVimeo");
+      if (host.includes("instagram.com")) return t("watch.fullMovieInstagram");
     } catch {
       // Fall through to generic labels below.
     }
   }
 
-  if (item.type === "tiktok") return "Full movie on TikTok";
-  return "Watch full film";
+  if (item.type === "tiktok") return t("watch.fullMovieTikTok");
+  return t("watch.fullFilm");
 }

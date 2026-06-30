@@ -9,12 +9,11 @@ import { getViewfinderMode } from "@/components/ui/button-viewfinder";
 import { scrollToSection } from "@/components/scroll-page-button";
 import { cn } from "@/lib/utils";
 import type { VariantProps } from "class-variance-authority";
-import Link, { type LinkProps } from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useReducedMotion } from "motion/react";
-import type { MouseEvent, ReactNode } from "react";
+import type { ComponentProps, MouseEvent, ReactNode } from "react";
 
-type ViewfinderLinkProps = LinkProps &
+type ViewfinderLinkProps = ComponentProps<typeof Link> &
   VariantProps<typeof buttonVariants> & {
     className?: string;
     children: ReactNode;

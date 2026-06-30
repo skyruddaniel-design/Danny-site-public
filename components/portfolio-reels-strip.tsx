@@ -1,14 +1,14 @@
 "use client";
 
 import { PortfolioMediaCard } from "@/components/portfolio-media-card";
-import type { PortfolioItem } from "@/lib/portfolio";
+import type { LocalizedPortfolioItem } from "@/lib/portfolio";
 import { motion, useReducedMotion } from "motion/react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 type PortfolioReelsStripProps = {
-  items: PortfolioItem[];
-  onOpenPreview?: (item: PortfolioItem) => void;
+  items: LocalizedPortfolioItem[];
+  onOpenPreview?: (item: LocalizedPortfolioItem) => void;
 };
 
 export function PortfolioReelsStrip({

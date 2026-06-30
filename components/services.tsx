@@ -10,12 +10,16 @@ import {
   useTransform,
 } from "motion/react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const expandEase = [0.32, 0.72, 0, 1] as const;
 
+type ServiceKey = "video" | "photography" | "strategy" | "postProduction";
+
 type Service = {
+  key: ServiceKey;
   title: string;
   summary: string;
   items: string[];
@@ -23,63 +27,55 @@ type Service = {
   imageAlt: string;
 };
 
-const SERVICES: Service[] = [
+const SERVICE_CONFIG: {
+  key: ServiceKey;
+  image: string;
+  itemKeys: string[];
+}[] = [
   {
-    title: "Video",
-    summary:
-      "Story-led films built for attention — from first brief to final export.",
+    key: "video",
     image:
       "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Cinematographer filming on location",
-    items: [
-      "Commercials",
-      "Interviews",
-      "Reels",
-      "Event films",
-      "Campaign content",
+    itemKeys: [
+      "commercials",
+      "interviews",
+      "reels",
+      "eventFilms",
+      "campaignContent",
     ],
   },
   {
-    title: "Photography",
-    summary:
-      "Consistent imagery that strengthens how your brand looks everywhere.",
+    key: "photography",
     image:
       "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Photographer adjusting a camera in studio",
-    items: [
-      "Product photography",
-      "Portraits",
-      "Lifestyle imagery",
-      "Brand image libraries",
+    itemKeys: [
+      "productPhotography",
+      "portraits",
+      "lifestyleImagery",
+      "brandImageLibraries",
     ],
   },
   {
-    title: "Strategy",
-    summary:
-      "Clear direction before the cameras roll — so every asset has a job to do.",
+    key: "strategy",
     image:
       "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Creative team planning a campaign together",
-    items: [
-      "Creative concepts",
-      "Scripting",
-      "Content planning",
-      "Platform optimisation",
+    itemKeys: [
+      "creativeConcepts",
+      "scripting",
+      "contentPlanning",
+      "platformOptimisation",
     ],
   },
   {
-    title: "Post Production",
-    summary:
-      "Polished finishing that makes the work feel intentional, not assembled.",
+    key: "postProduction",
     image:
       "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Video editor working at a colour grading workstation",
-    items: [
-      "Editing",
-      "Colour grading",
-      "Sound design",
-      "Subtitles",
-      "Delivery in every format",
+    itemKeys: [
+      "editing",
+      "colourGrading",
+      "soundDesign",
+      "subtitles",
+      "deliveryInEveryFormat",
     ],
   },
 ];
@@ -98,8 +94,8 @@ function useIsDesktop() {
   return isDesktop;
 }
 
-function getGridColumns(activeIndex: number | null) {
-  return SERVICES.map((_, index) => {
+function getGridColumns(count: number, activeIndex: number | null) {
+  return Array.from({ length: count }, (_, index) => {
     if (activeIndex === null) {
       return "minmax(0, 1fr)";
     }
@@ -119,6 +115,7 @@ function ServiceCard({
   prefersReducedMotion,
   hideSystemCursor,
   hoverEnabled,
+  exploreLabel,
 }: {
   service: Service;
   index: number;
@@ -128,6 +125,7 @@ function ServiceCard({
   prefersReducedMotion: boolean | null;
   hideSystemCursor?: boolean;
   hoverEnabled?: boolean;
+  exploreLabel: string;
 }) {
   const contentTransition = prefersReducedMotion
     ? { duration: 0 }
@@ -237,7 +235,7 @@ function ServiceCard({
             animate={{ opacity: active ? 0 : 1 }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.25, ease }}
           >
-            Explore
+            {exploreLabel}
           </motion.p>
         </div>
       </div>
@@ -246,10 +244,20 @@ function ServiceCard({
 }
 
 export function Services() {
+  const t = useTranslations("services");
   const prefersReducedMotion = useReducedMotion();
   const isDesktop = useIsDesktop();
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const services: Service[] = SERVICE_CONFIG.map(({ key, image, itemKeys }) => ({
+    key,
+    title: t(`items.${key}.title`),
+    summary: t(`items.${key}.summary`),
+    image,
+    imageAlt: t(`items.${key}.imageAlt`),
+    items: itemKeys.map((itemKey) => t(`items.${key}.items.${itemKey}`)),
+  }));
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -295,7 +303,9 @@ export function Services() {
     },
   };
 
-  const gridTemplateColumns = isDesktop ? getGridColumns(activeIndex) : "1fr";
+  const gridTemplateColumns = isDesktop
+    ? getGridColumns(services.length, activeIndex)
+    : "1fr";
   const magneticEnabled = isDesktop && !prefersReducedMotion;
 
   return (
@@ -329,12 +339,10 @@ export function Services() {
           <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
             <motion.div variants={fadeUp} className="relative z-10 max-w-xl">
               <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-                What we make
+                {t("heading")}
               </h2>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
-                One team from brief to delivery — film, photography, strategy,
-                and post-production for brands that need to look as sharp as
-                they sound.
+                {t("intro")}
               </p>
             </motion.div>
 
@@ -344,7 +352,7 @@ export function Services() {
                 className="pointer-events-none shrink-0 self-start font-heading text-[clamp(3.5rem,10vw,7.5rem)] leading-[0.85] font-bold tracking-tighter text-foreground/10 uppercase select-none md:pt-1 md:text-right"
                 style={parallaxEnabled ? { y: watermarkY } : undefined}
               >
-                Services
+                {t("watermark")}
               </motion.p>
             </motion.div>
           </div>
@@ -375,9 +383,9 @@ export function Services() {
             style={{ gridTemplateColumns }}
             onMouseLeave={isDesktop ? () => setActiveIndex(null) : undefined}
           >
-            {SERVICES.map((service, index) => (
+            {services.map((service, index) => (
               <motion.div
-                key={service.title}
+                key={service.key}
                 variants={fadeUp}
                 className="min-h-0 min-w-0"
               >
@@ -394,6 +402,7 @@ export function Services() {
                   prefersReducedMotion={prefersReducedMotion}
                   hideSystemCursor={magneticEnabled}
                   hoverEnabled={isDesktop}
+                  exploreLabel={t("card.explore")}
                 />
               </motion.div>
             ))}

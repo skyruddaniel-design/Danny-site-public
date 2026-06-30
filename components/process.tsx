@@ -3,7 +3,11 @@
 import { PortfolioCarousel } from "@/components/portfolio-carousel";
 import { PortfolioPreviewLightbox } from "@/components/portfolio-preview-lightbox";
 import { ViewfinderLink } from "@/components/ui/viewfinder-link";
-import { PORTFOLIO_PREVIEW, type PortfolioItem } from "@/lib/portfolio";
+import {
+  localizePortfolioItems,
+  PORTFOLIO_PREVIEW,
+  type LocalizedPortfolioItem,
+} from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 import {
   motion,
@@ -14,35 +18,17 @@ import {
 } from "motion/react";
 import { Camera, Clapperboard, Compass, ArrowUpRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useMemo, useRef, useState } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-type Step = {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-};
+type StepKey = "discovery" | "production" | "delivery";
 
-const STEPS: Step[] = [
-  {
-    title: "Discovery",
-    icon: Compass,
-    description:
-      "We define your audience, message, channels, and production requirements.",
-  },
-  {
-    title: "Production",
-    icon: Camera,
-    description:
-      "We plan the shoot, locations, crew, and content schedule.",
-  },
-  {
-    title: "Delivery",
-    icon: Clapperboard,
-    description:
-      "You receive ready-to-use files for websites, social media, advertising, and presentations.",
-  },
+const STEP_CONFIG: { key: StepKey; icon: LucideIcon }[] = [
+  { key: "discovery", icon: Compass },
+  { key: "production", icon: Camera },
+  { key: "delivery", icon: Clapperboard },
 ];
 
 function ProcessBackground({
@@ -66,9 +52,18 @@ function ProcessBackground({
 }
 
 export function Process() {
+  const t = useTranslations("process");
+  const tPortfolio = useTranslations("portfolio");
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
-  const [previewItem, setPreviewItem] = useState<PortfolioItem | null>(null);
+  const [previewItem, setPreviewItem] = useState<LocalizedPortfolioItem | null>(
+    null
+  );
+
+  const previewItems = useMemo(
+    () => localizePortfolioItems(PORTFOLIO_PREVIEW, (k, v) => tPortfolio(k, v)),
+    [tPortfolio]
+  );
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -139,11 +134,10 @@ export function Process() {
           <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
             <motion.div variants={fadeUp} className="relative z-10 max-w-xl">
               <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl md:leading-[1.1]">
-                From concept to delivery
+                {t("heading")}
               </h2>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
-                A smooth production process with clear milestones — so you
-                always know what&apos;s happening and when your assets land.
+                {t("intro")}
               </p>
             </motion.div>
 
@@ -153,7 +147,7 @@ export function Process() {
                 className="pointer-events-none shrink-0 self-start font-heading text-[clamp(3.5rem,10vw,7.5rem)] leading-[0.85] font-bold tracking-tighter text-foreground/10 uppercase select-none md:pt-1 md:text-right"
                 style={parallaxEnabled ? { y: watermarkY } : undefined}
               >
-                Process
+                {t("watermark")}
               </motion.p>
             </motion.div>
           </div>
@@ -173,7 +167,7 @@ export function Process() {
               className="relative w-full min-h-[320px] flex-1 md:min-h-0"
             >
               <PortfolioCarousel
-                items={PORTFOLIO_PREVIEW}
+                items={previewItems}
                 className="h-full min-h-[320px] md:min-h-[280px]"
                 onOpenPreview={setPreviewItem}
               />
@@ -187,7 +181,7 @@ export function Process() {
                 className="w-full sm:w-auto"
                 data-icon="inline-end"
               >
-                More of our work
+                {t("cta.moreWork")}
                 <ArrowUpRight className="size-4" />
               </ViewfinderLink>
             </motion.div>
@@ -200,9 +194,9 @@ export function Process() {
             viewport={{ once: true, margin: "-60px" }}
             variants={stepStagger}
           >
-            {STEPS.map((step, index) => (
+            {STEP_CONFIG.map((step, index) => (
               <motion.li
-                key={step.title}
+                key={step.key}
                 variants={fadeUp}
                 className="grid grid-cols-[auto_1fr] gap-x-5 md:gap-x-6"
               >
@@ -215,7 +209,7 @@ export function Process() {
                     />
                   </div>
 
-                  {index < STEPS.length - 1 && (
+                  {index < STEP_CONFIG.length - 1 && (
                     <div
                       aria-hidden
                       className="absolute top-9 left-1/2 -bottom-10 w-px -translate-x-1/2 overflow-hidden bg-border md:top-11"
@@ -237,13 +231,15 @@ export function Process() {
                   )}
                 >
                   <span className="font-mono text-[10px] tracking-[0.22em] text-primary uppercase md:text-xs">
-                    Step · {String(index + 1).padStart(2, "0")}
+                    {t("steps.label", {
+                      number: String(index + 1).padStart(2, "0"),
+                    })}
                   </span>
                   <h3 className="mt-3 font-heading text-xl font-semibold tracking-tight md:text-2xl">
-                    {step.title}
+                    {t(`steps.${step.key}.title`)}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
-                    {step.description}
+                    {t(`steps.${step.key}.description`)}
                   </p>
                 </article>
               </motion.li>
