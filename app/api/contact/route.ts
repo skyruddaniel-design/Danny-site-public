@@ -1,19 +1,12 @@
+import { sendContactEmail, type ContactEmailPayload } from "@/lib/email/contact";
 import { NextResponse } from "next/server";
-
-type ContactPayload = {
-  name: string;
-  email: string;
-  company?: string;
-  service: string;
-  message: string;
-};
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 export async function POST(request: Request) {
-  let body: ContactPayload;
+  let body: ContactEmailPayload;
 
   try {
     body = await request.json();
@@ -48,8 +41,20 @@ export async function POST(request: Request) {
     );
   }
 
-  // Wire up Resend, SendGrid, or similar here when ready.
-  console.info("[contact]", { name, email, company, service, message });
+  try {
+    const result = await sendContactEmail({
+      name,
+      email,
+      company,
+      service,
+      message,
+    });
 
-  return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, mode: result.mode });
+  } catch {
+    return NextResponse.json(
+      { error: "We could not send your message right now. Please try again later." },
+      { status: 500 }
+    );
+  }
 }

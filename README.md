@@ -191,6 +191,32 @@ export const SITE_NAME = "Skyrud Media";
 export const CONTACT_EMAIL = "daniel.skyrud@hotmail.com";
 ```
 
+### Kontaktskjema (Resend)
+
+Henvendelser fra kontaktskjemaet går via [Resend](https://resend.com). Koden er klar — dere trenger bare å legge inn nøkler når kontoen er satt opp.
+
+**1. Lokalt:** Kopier `.env.example` til `.env` og fyll inn verdiene.
+
+**2. På Vercel:** Settings → Environment Variables → legg inn de samme variablene for Production (og Preview om ønskelig).
+
+| Variabel | Hva den gjør |
+|----------|----------------|
+| `RESEND_API_KEY` | API-nøkkel fra Resend |
+| `RESEND_FROM_EMAIL` | Avsender, f.eks. `Skyrud Media <kontakt@skyrudmedia.no>` |
+| `CONTACT_TO_EMAIL` | Hvor henvendelser sendes (valgfri — standard er `CONTACT_EMAIL` i `lib/site.ts`) |
+
+**Uten `RESEND_API_KEY`:** Skjemaet fungerer fortsatt, men innsendinger logges bare på serveren (nyttig under utvikling).
+
+**Når Resend-kontoen er klar (kompisen din):**
+
+1. Opprett konto på [resend.com](https://resend.com)
+2. Verifiser domenet `skyrudmedia.no` (DNS-poster fra Resend)
+3. Opprett API-nøkkel og send den til deg
+4. Sett `RESEND_FROM_EMAIL` til en verifisert adresse på domenet, f.eks. `kontakt@skyrudmedia.no`
+5. Legg inn `RESEND_API_KEY` og `RESEND_FROM_EMAIL` i Vercel → redeploy
+
+For testing før domene er verifisert kan Resend sin testadresse brukes: `Skyrud Media <onboarding@resend.dev>` (da kan e-post bare sendes til adressen på Resend-kontoen).
+
 ### Personvern-side
 
 Teksten ligger i `app/privacy/page.tsx`. Dato for sist oppdatert: `PRIVACY_LAST_UPDATED` i `lib/site.ts`.
@@ -206,6 +232,8 @@ lib/portfolio.ts     Media + teknisk info for portfolio
 messages/no.json     Norsk tekst (inkl. portfolio-titler)
 messages/en.json     Engelsk tekst
 lib/site.ts       Navn, e-post, osv.
+lib/email/        E-post (Resend / kontaktskjema)
+.env.example      Mal for miljøvariabler (Resend)
 public/images/    Bilder
 public/videos/    Videoer
 ```
