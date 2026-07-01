@@ -246,7 +246,7 @@ export function Contact() {
                 </p>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="mt-4 flex min-w-0 items-start gap-3 font-heading text-lg font-semibold tracking-tight transition-colors hover:text-primary md:text-xl lg:text-2xl"
+                  className="mt-4 flex min-w-0 items-center gap-3 font-heading text-lg font-semibold tracking-tight transition-colors hover:text-primary md:text-xl lg:text-2xl"
                 >
                   <Mail
                     className="mt-0.5 size-5 shrink-0 text-primary"
