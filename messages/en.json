@@ -1,6 +1,10 @@
 {
   "meta": {
-    "siteDescription": "Content production — strategy, video, photography and social media."
+    "siteDescription": "Content production — strategy, video, photography and social media.",
+    "homeTitle": "Skyrud Media — video, photo and content production",
+    "homeDescription": "Skyrud Media creates visual content for brands: film, video, photography, strategy and social media. From brief to final export.",
+    "portfolioTitle": "Selected work — Skyrud Media",
+    "portfolioDescription": "Browse selected short films, TikTok edits and photography from Skyrud Media — visual content from brief to final export."
   },
   "hero": {
     "description": "Visual content for brands that want to communicate clearly, professionally, and with impact.",
@@ -10,6 +14,7 @@
     },
     "headline": {
       "prefix": "Content that gets brands ",
+      "seo": "Content that gets brands noticed, remembered, seen and shared.",
       "words": {
         "noticed": "noticed.",
         "remembered": "remembered.",
@@ -288,15 +293,28 @@
           "service": "Service you are interested in",
           "details": "Project details and any other information you choose to share"
         },
-        "noTracking": "We do not use analytics, advertising trackers, or non-essential cookies on this website."
+        "noTracking": "Aside from one language-preference cookie (see section 3), we do not use analytics, advertising trackers, or other non-essential cookies."
+      },
+      "cookies": {
+        "title": "3. Cookies",
+        "intro": "We use one functional cookie to remember your language choice between visits.",
+        "fields": {
+          "name": "Name",
+          "purpose": "Purpose",
+          "duration": "Duration"
+        },
+        "localeName": "NEXT_LOCALE",
+        "localePurpose": "Remembers whether you prefer Norwegian or English",
+        "localeDuration": "1 year",
+        "control": "You can delete cookies at any time through your browser settings. If you delete NEXT_LOCALE, your language choice will not be remembered on your next visit."
       },
       "howWeCollect": {
-        "title": "3. How we collect data",
+        "title": "4. How we collect data",
         "form": "We collect personal data when you submit the contact form on our website. The information is processed so we can receive and respond to your inquiry.",
         "hosting": "Like most websites, our hosting provider may automatically process limited technical information required to deliver the website securely, such as your IP address, browser type, and request logs. We do not use this information to identify visitors or for marketing."
       },
       "whyWeUse": {
-        "title": "4. Why we use your data and legal basis",
+        "title": "5. Why we use your data and legal basis",
         "intro": "We use your personal data to:",
         "purposes": {
           "respond": "Respond to your inquiry",
@@ -308,19 +326,19 @@
         "article6f": "Article 6(1)(f) — our legitimate interest in responding to enquiries and managing business communications."
       },
       "retention": {
-        "title": "5. How long we keep your data",
+        "title": "6. How long we keep your data",
         "main": "We keep contact form submissions only for as long as necessary to respond to your inquiry and manage any follow-up. If a business relationship develops, we may retain relevant correspondence for administrative, accounting, or legal purposes.",
         "deletion": "When personal data is no longer needed, it is deleted or anonymised."
       },
       "sharing": {
-        "title": "6. Who we share data with",
+        "title": "7. Who we share data with",
         "intro": "We do not sell your personal data. We may share it only with:",
         "providers": "Service providers that help us operate the website or deliver email (such as hosting or email services), under data processing agreements where required.",
         "authorities": "Authorities or professional advisers where we are legally required to do so.",
         "transfers": "If personal data is transferred outside the UK or EEA, we ensure appropriate safeguards are in place, such as Standard Contractual Clauses or an adequacy decision where applicable."
       },
       "rights": {
-        "title": "7. Your rights",
+        "title": "8. Your rights",
         "intro": "If you are in the UK or EEA, you have the right to:",
         "items": {
           "access": "Access the personal data we hold about you",
@@ -335,11 +353,11 @@
         "complaintOutro": "."
       },
       "security": {
-        "title": "8. Security",
+        "title": "9. Security",
         "body": "We take appropriate technical and organisational measures to protect personal data against unauthorised access, loss, misuse, or disclosure. While no method of transmission over the internet is completely secure, we work to protect the information you provide."
       },
       "changes": {
-        "title": "9. Changes to this policy",
+        "title": "10. Changes to this policy",
         "body": "We may update this privacy policy from time to time. Any changes will be published on this page, and the \"Last updated\" date will be revised accordingly."
       }
     }

@@ -217,6 +217,24 @@ Henvendelser fra kontaktskjemaet går via [Resend](https://resend.com). Koden er
 
 For testing før domene er verifisert kan Resend sin testadresse brukes: `Skyrud Media <onboarding@resend.dev>` (da kan e-post bare sendes til adressen på Resend-kontoen).
 
+### SEO og domene
+
+Når domenet er klart, legg inn i `.env` og Vercel:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://skyrudmedia.no
+```
+
+Dette brukes til sitemap, kanoniske URL-er, `hreflang` mellom `/no` og `/en`, og Open Graph når lenker deles.
+
+**Etter lansering:**
+
+1. Sett `NEXT_PUBLIC_SITE_URL` i Vercel og redeploy
+2. Gå til [Google Search Console](https://search.google.com/search-console) og verifiser domenet
+3. Send inn sitemap: `https://skyrudmedia.no/sitemap.xml`
+
+Valgfritt: Legg til et dedikert delingsbilde på `public/images/og.jpg` (1200×630) og oppdater `OG_IMAGE_PATH` i `lib/seo.ts`.
+
 ### Personvern-side
 
 Teksten ligger i `app/privacy/page.tsx`. Dato for sist oppdatert: `PRIVACY_LAST_UPDATED` i `lib/site.ts`.
@@ -232,8 +250,9 @@ lib/portfolio.ts     Media + teknisk info for portfolio
 messages/no.json     Norsk tekst (inkl. portfolio-titler)
 messages/en.json     Engelsk tekst
 lib/site.ts       Navn, e-post, osv.
+lib/seo.ts        SEO-hjelpere (metadata, sitemap-URL)
 lib/email/        E-post (Resend / kontaktskjema)
-.env.example      Mal for miljøvariabler (Resend)
+.env.example      Mal for miljøvariabler (Resend, SITE_URL)
 public/images/    Bilder
 public/videos/    Videoer
 ```

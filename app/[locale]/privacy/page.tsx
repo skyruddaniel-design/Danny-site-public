@@ -1,4 +1,6 @@
 import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
+import { buildPageMetadata } from "@/lib/seo";
 import {
   CONTACT_EMAIL,
   DATA_CONTROLLER,
@@ -18,10 +20,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "privacy.metadata" });
 
-  return {
+  return buildPageMetadata({
+    locale: locale as Locale,
     title: t("title", { siteName: SITE_NAME }),
     description: t("description", { siteName: SITE_NAME }),
-  };
+    pathname: "/privacy",
+  });
 }
 
 export default async function PrivacyPage({ params }: PageProps) {
@@ -84,6 +88,41 @@ export default async function PrivacyPage({ params }: PageProps) {
           </ul>
 
           <p className="mt-3">{t("sections.whatWeCollect.noTracking")}</p>
+        </section>
+
+        <section>
+          <h2 className="font-heading text-xl font-semibold tracking-tight text-foreground">
+            {t("sections.cookies.title")}
+          </h2>
+
+          <p className="mt-3">{t("sections.cookies.intro")}</p>
+
+          <dl className="mt-4 space-y-3 border border-border bg-card/50 p-4 text-sm">
+            <div className="grid gap-1 sm:grid-cols-[7rem_1fr]">
+              <dt className="font-medium text-muted-foreground">
+                {t("sections.cookies.fields.name")}
+              </dt>
+              <dd>
+                <code className="font-mono text-xs">
+                  {t("sections.cookies.localeName")}
+                </code>
+              </dd>
+            </div>
+            <div className="grid gap-1 sm:grid-cols-[7rem_1fr]">
+              <dt className="font-medium text-muted-foreground">
+                {t("sections.cookies.fields.purpose")}
+              </dt>
+              <dd>{t("sections.cookies.localePurpose")}</dd>
+            </div>
+            <div className="grid gap-1 sm:grid-cols-[7rem_1fr]">
+              <dt className="font-medium text-muted-foreground">
+                {t("sections.cookies.fields.duration")}
+              </dt>
+              <dd>{t("sections.cookies.localeDuration")}</dd>
+            </div>
+          </dl>
+
+          <p className="mt-3">{t("sections.cookies.control")}</p>
         </section>
 
         <section>

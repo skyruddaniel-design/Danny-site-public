@@ -1,6 +1,10 @@
 {
   "meta": {
-    "siteDescription": "Innholdsproduksjon — strategi, video, fotografi og sosiale medier."
+    "siteDescription": "Innholdsproduksjon — strategi, video, fotografi og sosiale medier.",
+    "homeTitle": "Skyrud Media — video, foto og innholdsproduksjon",
+    "homeDescription": "Skyrud Media leverer visuelt innhold for merkevarer: film, video, fotografi, strategi og sosiale medier. Fra brief til ferdig eksport.",
+    "portfolioTitle": "Utvalgt arbeid — Skyrud Media",
+    "portfolioDescription": "Se utvalgte kortfilmer, TikTok-klipp og fotografi fra Skyrud Media — visuelt innhold fra brief til ferdig eksport."
   },
   "hero": {
     "description": "Visuelt innhold for merkevarer som vil kommunisere tydelig, profesjonelt og med gjennomslag.",
@@ -10,6 +14,7 @@
     },
     "headline": {
       "prefix": "Innhold som får merkevarer ",
+      "seo": "Innhold som får merkevarer lagt merke til, husket, sett og delt.",
       "words": {
         "noticed": "lagt merke til.",
         "remembered": "husket.",
@@ -288,15 +293,28 @@
           "service": "Tjeneste du er interessert i",
           "details": "Prosjektdetaljer og annen informasjon du velger å dele"
         },
-        "noTracking": "Vi bruker ikke analyseverktøy, annonsesporing eller ikke-nødvendige informasjonskapsler på dette nettstedet."
+        "noTracking": "Utover én informasjonskapsel for språkvalg (se avsnitt 3), bruker vi ikke analyseverktøy, annonsesporing eller andre ikke-nødvendige informasjonskapsler."
+      },
+      "cookies": {
+        "title": "3. Informasjonskapsler (cookies)",
+        "intro": "Vi bruker én funksjonell informasjonskapsel for å huske språkvalget ditt mellom besøk.",
+        "fields": {
+          "name": "Navn",
+          "purpose": "Formål",
+          "duration": "Varighet"
+        },
+        "localeName": "NEXT_LOCALE",
+        "localePurpose": "Husker om du foretrekker norsk eller engelsk",
+        "localeDuration": "1 år",
+        "control": "Du kan slette informasjonskapsler når som helst via nettleserens innstillinger. Hvis du sletter NEXT_LOCALE, huskes ikke språkvalget ditt ved neste besøk."
       },
       "howWeCollect": {
-        "title": "3. Hvordan vi samler inn data",
+        "title": "4. Hvordan vi samler inn data",
         "form": "Vi samler inn personopplysninger når du sender inn kontaktskjemaet på nettstedet vårt. Informasjonen behandles slik at vi kan motta og svare på henvendelsen din.",
         "hosting": "Som de fleste nettsteder kan hosting-leverandøren vår automatisk behandle begrenset teknisk informasjon som er nødvendig for å levere nettstedet sikkert, for eksempel IP-adresse, nettlesertype og forespørselslogger. Vi bruker ikke denne informasjonen til å identifisere besøkende eller til markedsføring."
       },
       "whyWeUse": {
-        "title": "4. Hvorfor vi bruker opplysningene dine og rettslig grunnlag",
+        "title": "5. Hvorfor vi bruker opplysningene dine og rettslig grunnlag",
         "intro": "Vi bruker personopplysningene dine til å:",
         "purposes": {
           "respond": "Svare på henvendelsen din",
@@ -308,19 +326,19 @@
         "article6f": "Artikkel 6(1)(f) — vår berettigede interesse i å svare på henvendelser og administrere forretningskommunikasjon."
       },
       "retention": {
-        "title": "5. Hvor lenge vi oppbevarer opplysningene dine",
+        "title": "6. Hvor lenge vi oppbevarer opplysningene dine",
         "main": "Vi oppbevarer innsendelser fra kontaktskjemaet bare så lenge det er nødvendig for å svare på henvendelsen din og håndtere eventuell oppfølging. Hvis et forretningsforhold utvikler seg, kan vi beholde relevant korrespondanse av administrative, regnskapsmessige eller juridiske årsaker.",
         "deletion": "Når personopplysninger ikke lenger er nødvendige, slettes eller anonymiseres de."
       },
       "sharing": {
-        "title": "6. Hvem vi deler data med",
+        "title": "7. Hvem vi deler data med",
         "intro": "Vi selger ikke personopplysningene dine. Vi kan dele dem bare med:",
         "providers": "Tjenesteleverandører som hjelper oss med å drifte nettstedet eller levere e-post (for eksempel hosting eller e-posttjenester), under databehandleravtaler der det kreves.",
         "authorities": "Myndigheter eller faglige rådgivere der vi er juridisk forpliktet til det.",
         "transfers": "Hvis personopplysninger overføres utenfor Storbritannia eller EØS, sørger vi for at passende sikkerhetstiltak er på plass, for eksempel standard kontraktsklausuler eller en tilstrekkelighetsbeslutning der det er aktuelt."
       },
       "rights": {
-        "title": "7. Dine rettigheter",
+        "title": "8. Dine rettigheter",
         "intro": "Hvis du befinner deg i Storbritannia eller EØS, har du rett til å:",
         "items": {
           "access": "Få innsyn i personopplysningene vi har om deg",
@@ -335,11 +353,11 @@
         "complaintOutro": "."
       },
       "security": {
-        "title": "8. Sikkerhet",
+        "title": "9. Sikkerhet",
         "body": "Vi iverksetter passende tekniske og organisatoriske tiltak for å beskytte personopplysninger mot uautorisert tilgang, tap, misbruk eller utlevering. Selv om ingen metode for overføring over internett er helt sikker, jobber vi for å beskytte informasjonen du oppgir."
       },
       "changes": {
-        "title": "9. Endringer i denne erklæringen",
+        "title": "10. Endringer i denne erklæringen",
         "body": "Vi kan oppdatere denne personvernerklæringen fra tid til annen. Eventuelle endringer publiseres på denne siden, og datoen for «Sist oppdatert» oppdateres tilsvarende."
       }
     }

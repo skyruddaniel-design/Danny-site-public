@@ -3,6 +3,7 @@ import { HeroIntroProvider } from "@/components/hero-intro-context";
 import { SectionHashScroll } from "@/components/section-hash-scroll";
 import { SiteHeader } from "@/components/site-header";
 import { routing } from "@/i18n/routing";
+import { getMetadataBase } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -45,8 +46,13 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
+    metadataBase: getMetadataBase(),
     title: SITE_NAME,
     description: t("siteDescription"),
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

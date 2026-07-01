@@ -123,8 +123,11 @@ export function HeroHeadline({ active = true }: HeroHeadlineProps) {
 
   return (
     <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-7xl">
-      <span className="block">{t("prefix")}</span>
-      <span className="mt-1 block text-primary">
+      <span className="sr-only">{t("seo")}</span>
+      <span className="block" aria-hidden="true">
+        {t("prefix")}
+      </span>
+      <span className="mt-1 block text-primary" aria-hidden="true">
         <TypewriterHighlight words={words} active={active} />
       </span>
     </h1>
