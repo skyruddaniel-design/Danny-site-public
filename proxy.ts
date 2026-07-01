@@ -21,7 +21,7 @@ function requestWithNorwegianLocaleAlias(request: NextRequest) {
   return new NextRequest(request.url, { headers });
 }
 
-export default function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   return handleI18nRouting(requestWithNorwegianLocaleAlias(request));
 }
 

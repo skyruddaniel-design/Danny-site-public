@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/favicon.ico",
+        destination: "/images/favicon.png",
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

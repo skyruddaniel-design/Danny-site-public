@@ -2,7 +2,10 @@ import { routing, type Locale } from "@/i18n/routing";
 import { SITE_NAME } from "@/lib/site";
 import type { Metadata } from "next";
 
-export const OG_IMAGE_PATH = "/images/mann-pa-bussen-thumbnail.png";
+export const OG_IMAGE_PATH = "/images/og.jpg";
+
+/** Add `public/images/favicon.png` — recommended 512×512 PNG (square). */
+export const FAVICON_PATH = "/images/favicon.png";
 
 export const SITE_PATHS = ["/", "/portfolio", "/privacy"] as const;
 
@@ -29,8 +32,7 @@ export function getSitemapBaseUrl() {
 }
 
 export function getMetadataBase() {
-  const siteUrl = getSiteUrl();
-  return siteUrl ? new URL(siteUrl) : undefined;
+  return new URL(getSitemapBaseUrl());
 }
 
 export function getLocalizedPath(locale: Locale, pathname: SitePath = "/") {
@@ -53,6 +55,17 @@ export function buildLanguageAlternates(pathname: SitePath = "/") {
   return languages;
 }
 
+export function buildSiteIcons(): NonNullable<Metadata["icons"]> {
+  return {
+    icon: [
+      { url: FAVICON_PATH, sizes: "32x32", type: "image/png" },
+      { url: FAVICON_PATH, sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: FAVICON_PATH, sizes: "180x180", type: "image/png" }],
+    shortcut: FAVICON_PATH,
+  };
+}
+
 export function buildPageMetadata({
   locale,
   title,
@@ -64,14 +77,13 @@ export function buildPageMetadata({
   description: string;
   pathname?: SitePath;
 }): Metadata {
-  const siteUrl = getSiteUrl();
   const canonical = getLocalizedUrl(locale, pathname);
-  const ogImage = siteUrl ? `${siteUrl}${OG_IMAGE_PATH}` : OG_IMAGE_PATH;
 
   return {
     metadataBase: getMetadataBase(),
     title,
     description,
+    icons: buildSiteIcons(),
     alternates: {
       canonical,
       languages: buildLanguageAlternates(pathname),
@@ -86,7 +98,7 @@ export function buildPageMetadata({
       description,
       images: [
         {
-          url: ogImage,
+          url: OG_IMAGE_PATH,
           alt: SITE_NAME,
         },
       ],
@@ -95,7 +107,7 @@ export function buildPageMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: [OG_IMAGE_PATH],
     },
   };
 }

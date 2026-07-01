@@ -235,6 +235,8 @@ Dette brukes til sitemap, kanoniske URL-er, `hreflang` mellom `/no` og `/en`, og
 
 Valgfritt: Legg til et dedikert delingsbilde på `public/images/og.jpg` (1200×630) og oppdater `OG_IMAGE_PATH` i `lib/seo.ts`.
 
+**Favicon:** Legg til `public/images/favicon.png` (anbefalt **512×512 PNG**, kvadratisk). Nettleseren skalerer ned automatisk. Stien kan endres i `FAVICON_PATH` i `lib/seo.ts`.
+
 ### Personvern-side
 
 Teksten ligger i `app/privacy/page.tsx`. Dato for sist oppdatert: `PRIVACY_LAST_UPDATED` i `lib/site.ts`.
