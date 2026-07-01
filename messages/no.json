@@ -293,11 +293,11 @@
           "service": "Tjeneste du er interessert i",
           "details": "Prosjektdetaljer og annen informasjon du velger å dele"
         },
-        "noTracking": "Utover én informasjonskapsel for språkvalg (se avsnitt 3), bruker vi ikke analyseverktøy, annonsesporing eller andre ikke-nødvendige informasjonskapsler."
+        "noTracking": "Utover én informasjonskapsel for språkvalg (se avsnitt 3), setter vi ikke annonsesporing eller andre ikke-nødvendige informasjonskapsler."
       },
       "cookies": {
         "title": "3. Informasjonskapsler (cookies)",
-        "intro": "Vi bruker én funksjonell informasjonskapsel for å huske språkvalget ditt mellom besøk.",
+        "intro": "Vi bruker én funksjonell informasjonskapsel for å huske språkvalget ditt mellom besøk. Vercel Web Analytics, som vi bruker for besøksstatistikk, bruker ikke informasjonskapsler.",
         "fields": {
           "name": "Navn",
           "purpose": "Formål",
@@ -311,7 +311,8 @@
       "howWeCollect": {
         "title": "4. Hvordan vi samler inn data",
         "form": "Vi samler inn personopplysninger når du sender inn kontaktskjemaet på nettstedet vårt. Informasjonen behandles slik at vi kan motta og svare på henvendelsen din.",
-        "hosting": "Som de fleste nettsteder kan hosting-leverandøren vår automatisk behandle begrenset teknisk informasjon som er nødvendig for å levere nettstedet sikkert, for eksempel IP-adresse, nettlesertype og forespørselslogger. Vi bruker ikke denne informasjonen til å identifisere besøkende eller til markedsføring."
+        "hosting": "Som de fleste nettsteder kan hosting-leverandøren vår automatisk behandle begrenset teknisk informasjon som er nødvendig for å levere nettstedet sikkert, for eksempel IP-adresse, nettlesertype og forespørselslogger.",
+        "analytics": "Vi bruker Vercel Web Analytics for å forstå hvordan nettstedet brukes (for eksempel sidevisninger, enhetstype og land). Verktøyet bruker ikke informasjonskapsler eller tredjeparts annonsesporing, og data presenteres i aggregert form uten at vi identifiserer enkeltbesøkende."
       },
       "whyWeUse": {
         "title": "5. Hvorfor vi bruker opplysningene dine og rettslig grunnlag",
@@ -333,7 +334,7 @@
       "sharing": {
         "title": "7. Hvem vi deler data med",
         "intro": "Vi selger ikke personopplysningene dine. Vi kan dele dem bare med:",
-        "providers": "Tjenesteleverandører som hjelper oss med å drifte nettstedet eller levere e-post (for eksempel hosting eller e-posttjenester), under databehandleravtaler der det kreves.",
+        "providers": "Tjenesteleverandører som hjelper oss med å drifte nettstedet, levere e-post eller samle inn aggregert besøksstatistikk (for eksempel hosting, e-posttjenester eller Vercel Web Analytics), under databehandleravtaler der det kreves.",
         "authorities": "Myndigheter eller faglige rådgivere der vi er juridisk forpliktet til det.",
         "transfers": "Hvis personopplysninger overføres utenfor Storbritannia eller EØS, sørger vi for at passende sikkerhetstiltak er på plass, for eksempel standard kontraktsklausuler eller en tilstrekkelighetsbeslutning der det er aktuelt."
       },

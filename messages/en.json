@@ -293,11 +293,11 @@
           "service": "Service you are interested in",
           "details": "Project details and any other information you choose to share"
         },
-        "noTracking": "Aside from one language-preference cookie (see section 3), we do not use analytics, advertising trackers, or other non-essential cookies."
+        "noTracking": "Aside from one language-preference cookie (see section 3), we do not set advertising trackers or other non-essential cookies."
       },
       "cookies": {
         "title": "3. Cookies",
-        "intro": "We use one functional cookie to remember your language choice between visits.",
+        "intro": "We use one functional cookie to remember your language choice between visits. Vercel Web Analytics, which we use for visit statistics, does not use cookies.",
         "fields": {
           "name": "Name",
           "purpose": "Purpose",
@@ -311,7 +311,8 @@
       "howWeCollect": {
         "title": "4. How we collect data",
         "form": "We collect personal data when you submit the contact form on our website. The information is processed so we can receive and respond to your inquiry.",
-        "hosting": "Like most websites, our hosting provider may automatically process limited technical information required to deliver the website securely, such as your IP address, browser type, and request logs. We do not use this information to identify visitors or for marketing."
+        "hosting": "Like most websites, our hosting provider may automatically process limited technical information required to deliver the website securely, such as your IP address, browser type, and request logs.",
+        "analytics": "We use Vercel Web Analytics to understand how the website is used (for example page views, device type, and country). It does not use cookies or third-party advertising trackers, and data is shown in aggregated form without us identifying individual visitors."
       },
       "whyWeUse": {
         "title": "5. Why we use your data and legal basis",
@@ -333,7 +334,7 @@
       "sharing": {
         "title": "7. Who we share data with",
         "intro": "We do not sell your personal data. We may share it only with:",
-        "providers": "Service providers that help us operate the website or deliver email (such as hosting or email services), under data processing agreements where required.",
+        "providers": "Service providers that help us operate the website, deliver email, or collect aggregated visit statistics (such as hosting, email services, or Vercel Web Analytics), under data processing agreements where required.",
         "authorities": "Authorities or professional advisers where we are legally required to do so.",
         "transfers": "If personal data is transferred outside the UK or EEA, we ensure appropriate safeguards are in place, such as Standard Contractual Clauses or an adequacy decision where applicable."
       },

@@ -2,6 +2,7 @@ import { Footer } from "@/components/footer";
 import { HeroIntroProvider } from "@/components/hero-intro-context";
 import { SectionHashScroll } from "@/components/section-hash-scroll";
 import { SiteHeader } from "@/components/site-header";
+import { VercelAnalytics } from "@/components/vercel-analytics";
 import { routing } from "@/i18n/routing";
 import { getMetadataBase, buildSiteIcons } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
@@ -87,6 +88,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
             <Footer />
           </HeroIntroProvider>
         </NextIntlClientProvider>
+        <VercelAnalytics />
       </body>
     </html>
   );

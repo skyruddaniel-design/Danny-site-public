@@ -133,6 +133,8 @@ export default async function PrivacyPage({ params }: PageProps) {
           <p className="mt-3">{t("sections.howWeCollect.form")}</p>
 
           <p className="mt-3">{t("sections.howWeCollect.hosting")}</p>
+
+          <p className="mt-3">{t("sections.howWeCollect.analytics")}</p>
         </section>
 
         <section>
