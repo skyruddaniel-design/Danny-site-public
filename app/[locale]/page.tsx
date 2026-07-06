@@ -7,17 +7,15 @@ import type { Locale } from "@/i18n/routing";
 import { buildPageMetadata, getSiteUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { redirect } from "next/navigation";
-
 
 type PageProps = {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 };
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale } = params;
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return buildPageMetadata({
@@ -29,7 +27,8 @@ export async function generateMetadata({
 }
 
 export default async function Home({ params }: PageProps) {
-  const { locale } = await params;
+  const { locale } = params;
+
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "meta" });
@@ -44,6 +43,7 @@ export default async function Home({ params }: PageProps) {
           locale={locale as Locale}
         />
       ) : null}
+
       <Hero />
       <Services />
       <Process />

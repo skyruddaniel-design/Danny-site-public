@@ -31,7 +31,7 @@ const geistMono = Geist_Mono({
 
 type LayoutProps = {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 };
 
 export function generateStaticParams() {
@@ -41,9 +41,9 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale } = params;
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
@@ -59,7 +59,7 @@ export async function generateMetadata({
 }
 
 export default async function LocaleLayout({ children, params }: LayoutProps) {
-  const { locale } = await params;
+  const { locale } = params;
 
   if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
