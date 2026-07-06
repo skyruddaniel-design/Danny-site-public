@@ -7,6 +7,11 @@ import type { Locale } from "@/i18n/routing";
 import { buildPageMetadata, getSiteUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { redirect } from "next/navigation";
+
+export default function Home() {
+  redirect("/no");
+}
 
 type PageProps = {
   params: Promise<{ locale: string }>;
