@@ -7,7 +7,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 export const runtime = "edge";
 
 type PageProps = {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 };
 
 export async function generateMetadata({
