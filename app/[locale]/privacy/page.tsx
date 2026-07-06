@@ -10,6 +10,8 @@ import {
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+export const runtime = "edge";
+
 type PageProps = {
   params: Promise<{ locale: string }>;
 };
