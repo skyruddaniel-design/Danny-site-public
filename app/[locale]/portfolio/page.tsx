@@ -13,7 +13,7 @@ type PageProps = {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale } = params;
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return buildPageMetadata({
@@ -25,7 +25,7 @@ export async function generateMetadata({
 }
 
 export default async function Portfolio({ params }: PageProps) {
-  const { locale } = await params;
+  const { locale } = params;
   setRequestLocale(locale);
 
   return (
