@@ -9,9 +9,6 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 
-export default function Home() {
-  redirect("/no");
-}
 
 type PageProps = {
   params: Promise<{ locale: string }>;
