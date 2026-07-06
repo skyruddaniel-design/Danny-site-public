@@ -41,3 +41,10 @@
     "typescript": "^5"
   }
 }
+
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "preview": "opennextjs-cloudflare build && wrangler dev",
+  "deploy": "opennextjs-cloudflare build && wrangler deploy"
+}
