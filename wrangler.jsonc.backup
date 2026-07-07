@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "danny-site",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-07-06",
+  "assets": {
+    "directory": ".open-next/assets"
+  }
+}
