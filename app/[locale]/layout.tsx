@@ -68,7 +68,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   }
 
   setRequestLocale(locale);
-  const messages = await getMessages()grep -n "<html" app/[locale]/layout.tsx;
+  const messages = await getMessages()
 
   return (
   <NextIntlClientProvider messages={messages}>
