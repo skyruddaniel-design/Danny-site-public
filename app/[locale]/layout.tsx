@@ -79,28 +79,15 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      className={cn(
-        "h-full antialiased motion-reduce:scroll-auto",
-        montserrat.variable,
-        outfit.variable,
-        geistMono.variable
-      )}
-      data-scroll-behavior="smooth"
-    >
-      <body className="flex min-h-screen flex-col font-sans">
-        <NextIntlClientProvider messages={messages}>
-          <HeroIntroProvider>
-            <SectionHashScroll />
-            <SiteHeader />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </HeroIntroProvider>
-        </NextIntlClientProvider>
+    <NextIntlClientProvider messages={messages}>
+      <HeroIntroProvider>
+        <SectionHashScroll />
+        <SiteHeader />
+        <div className="flex-1">{children}</div>
+        <Footer />
+      </HeroIntroProvider>
 
-        <VercelInsights />
-      </body>
-    </html>
+      <VercelInsights />
+    </NextIntlClientProvider>
   );
 }
