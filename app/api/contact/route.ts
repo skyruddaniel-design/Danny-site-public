@@ -1,7 +1,6 @@
 import { sendContactEmail, type ContactEmailPayload } from "@/lib/email/contact";
 import { NextResponse } from "next/server";
 
-export const runtime = "edge";
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
