@@ -43,14 +43,10 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }): Promise<Metadata> {
   const { locale } = await params;
-
-  const t = await getTranslations({
-    locale,
-    namespace: "meta",
-  });
+  const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
     metadataBase: getMetadataBase(),
@@ -64,10 +60,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: LayoutProps) {
+export default async function LocaleLayout({ children, params }: LayoutProps) {
   const { locale } = await params;
 
   if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
@@ -75,19 +68,18 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale);
-
-  const messages = await getMessages();
+  const messages = await getMessages()grep -n "<html" app/[locale]/layout.tsx;
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <HeroIntroProvider>
-        <SectionHashScroll />
-        <SiteHeader />
-        <div className="flex-1">{children}</div>
-        <Footer />
-      </HeroIntroProvider>
+  <NextIntlClientProvider messages={messages}>
+    <HeroIntroProvider>
+      <SectionHashScroll />
+      <SiteHeader />
+      <div className="flex-1">{children}</div>
+      <Footer />
+    </HeroIntroProvider>
 
-      <VercelInsights />
-    </NextIntlClientProvider>
-  );
+    <VercelInsights />
+  </NextIntlClientProvider>
+);
 }

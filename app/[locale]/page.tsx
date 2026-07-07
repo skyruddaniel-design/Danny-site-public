@@ -15,7 +15,7 @@ type PageProps = {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { locale } = params;
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return buildPageMetadata({
@@ -27,7 +27,7 @@ export async function generateMetadata({
 }
 
 export default async function Home({ params }: PageProps) {
-  const { locale } = params;
+  const { locale } = await params;
 
   setRequestLocale(locale);
 
