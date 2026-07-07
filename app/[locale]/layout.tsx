@@ -31,7 +31,9 @@ const geistMono = Geist_Mono({
 
 type LayoutProps = {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{
+    locale: string;
+  }>;
 };
 
 export function generateStaticParams() {
@@ -41,10 +43,14 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale } = params;
-  const t = await getTranslations({ locale, namespace: "meta" });
+  const { locale } = await params;
+
+  const t = await getTranslations({
+    locale,
+    namespace: "meta",
+  });
 
   return {
     metadataBase: getMetadataBase(),
@@ -58,14 +64,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocaleLayout({ children, params }: LayoutProps) {
-  const { locale } = params;
+export default async function LocaleLayout({
+  children,
+  params,
+}: LayoutProps) {
+  const { locale } = await params;
 
   if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }
 
   setRequestLocale(locale);
+
   const messages = await getMessages();
 
   return (
@@ -88,6 +98,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
             <Footer />
           </HeroIntroProvider>
         </NextIntlClientProvider>
+
         <VercelInsights />
       </body>
     </html>
